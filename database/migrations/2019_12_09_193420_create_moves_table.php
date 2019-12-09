@@ -16,9 +16,9 @@ class CreateMovesTable extends Migration
         Schema::create('moves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('move');
-            $table->timestamp('play_time');
-            $table->timestamp('play_time_start');
-            $table->char('status', '1');
+            $table->timestamp('play_time')->nullable();
+            $table->timestamp('play_time_start')->nullable();
+            $table->char('status', '1')->nullable();
             $table->timestamps();
         });
     }
