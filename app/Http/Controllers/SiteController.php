@@ -12,6 +12,9 @@ class SiteController extends Controller
     protected $contentRightBar = false;
     protected $bar = false;
 
-        
+    public function __construct()
+    {
+
+    }
 
 }
