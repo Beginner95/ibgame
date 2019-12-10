@@ -1,0 +1,10 @@
+<svg width="634" height="122" viewBox="0 0 634 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 1H1V7" stroke="white"/>
+<path d="M1 115L1 121L7 121" stroke="white"/>
+<path d="M627 120L633 120L633 114" stroke="white"/>
+<path d="M633 8L633 2L627 2" stroke="white"/>
+<path opacity="0.2" d="M1 64L1 57" stroke="white"/>
+<line opacity="0.2" x1="1" y1="60.5" x2="7" y2="60.5" stroke="white"/>
+<path d="M633 57L633 64" stroke="white"/>
+<line x1="633" y1="60.5" x2="627" y2="60.5" stroke="white"/>
+</svg>
