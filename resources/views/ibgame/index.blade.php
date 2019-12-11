@@ -1,4 +1,3 @@
-@extends('layouts.app')
 @extends(env('THEME') . '.layouts.head')
 <div class="loader">
     <img src="img/loader_icon.png" alt="#">
@@ -19,7 +18,7 @@
         </div>
     </header>
     <h1 class="greeting">Добро пожаловать в игру!</h1>
-    {{ Form::open(['route' => 'admin.lessons.store', 'method' => 'put', 'class' => 'teams_wrap']) }}
+    {{ Form::open(['route' => 'game', 'method' => 'get', 'class' => 'teams_wrap']) }}
         <h3>Выберите свою команду</h3>
         <ul class="team_list d-flex">
             @foreach($teams as $team)
