@@ -14,8 +14,8 @@ class ChangeResourcesTable extends Migration
     public function up()
     {
         Schema::table('resources', function (Blueprint $table) {
-            $table->bigInteger('teams_id')->unsigned();
-            $table->foreign('teams_id')->references('id')->on('teams');
+            $table->bigInteger('team_id')->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 

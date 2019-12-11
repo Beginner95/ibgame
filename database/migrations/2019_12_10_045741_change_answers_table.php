@@ -14,8 +14,8 @@ class ChangeAnswersTable extends Migration
     public function up()
     {
         Schema::table('answers', function (Blueprint $table) {
-            $table->bigInteger('moves_id')->unsigned();
-            $table->foreign('moves_id')->references('id')->on('moves');
+            $table->bigInteger('move_id')->unsigned();
+            $table->foreign('move_id')->references('id')->on('moves');
         });
     }
 
