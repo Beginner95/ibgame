@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TeamsRepository;
+use App\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
-class IndexController extends SiteController
+class IndexController extends Controller
 {
-    public function __construct(TeamsRepository $t_rep)
-    {
-        parent::__construct();
-        $this->t_rep = $t_rep;
-        $this->template = env('THEME') . '.index';
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,14 +14,8 @@ class IndexController extends SiteController
      */
     public function index()
     {
-        $teams = $this->getTeams();
-        $this->vars = Arr::add($this->vars, 'teams', $teams);
-        return $this->renderOutput();
-    }
-
-    protected function getTeams()
-    {
-        return $this->t_rep->get();
+        $teams = Team::get();
+        return view(env('THEME') . '.index', ['teams' => $teams]);
     }
 
     /**
