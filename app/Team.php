@@ -20,4 +20,9 @@ class Team extends Model
     {
         return $this->hasMany(Evidence::class);
     }
+
+    public function moves()
+    {
+        return $this->hasMany(Move::class);
+    }
 }
