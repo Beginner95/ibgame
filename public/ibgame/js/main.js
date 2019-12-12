@@ -1,7 +1,7 @@
 function customeSelect() {
 	var x, i, j, selElmnt, a, b, c;
 	/* Look for any elements with the class "custom-select": */
-	x = document.getElementsByClassName("custom-select");
+	x = getEBCN("custom-select");
 	for (i = 0; i < x.length; i++) {
 	  selElmnt = x[i].getElementsByTagName("select")[0];
 	  /* For each element, create a new DIV that will act as the selected item: */
@@ -54,8 +54,8 @@ function customeSelect() {
 	  /* A function that will close all select boxes in the document,
 	  except the current select box: */
 	  var x, y, i, arrNo = [];
-	  x = document.getElementsByClassName("select-items");
-	  y = document.getElementsByClassName("select-selected");
+	  x = getEBCN("select-items");
+	  y = getEBCN("select-selected");
 	  for (i = 0; i < y.length; i++) {
 	    if (elmnt == y[i]) {
 	      arrNo.push(i)
@@ -74,70 +74,100 @@ function customeSelect() {
 	then close all select boxes: */
 	document.addEventListener("click", closeAllSelect);
 }
-customeSelect()
+customeSelect();
 
 function loader() {
 	var loaderDelete = setTimeout(function(e) {
-		document.getElementsByClassName('loader')[0].style.display = 'none'
+        getEBCN('loader')[0].style.display = 'none'
 	}, 2500);
 }
-loader()
+loader();
 
 function timer() {
-	var hours = parseInt(document.getElementsByClassName('timer-hours')[0].innerText);
-	var mins = parseInt(document.getElementsByClassName('timer-mins')[0].innerText);
-	var secs = parseInt(document.getElementsByClassName('timer-secs')[0].innerText);
-
+	var hours = parseInt(getEBCN('timer-hours')[0].innerText);
+	var mins = parseInt(getEBCN('timer-mins')[0].innerText);
+	var secs = parseInt(getEBCN('timer-secs')[0].innerText);
+	let i = 0;
+	let team_id = getId('team_id').value;
+	let move_id = getId('move_id').value;
 	var timer = setInterval(function(){
 
-		if (hours == 0 && mins <= 1) {
-			document.getElementsByClassName('timer')[0].classList.add('last_minute')
-			document.getElementsByClassName('time_alert').classList.remove('hidden')
+		if (hours === 0 && mins <= 1) {
+            getEBCN('timer')[0].classList.add('last_minute');
+            if (mins === 1 && secs >= 52) {
+                qS('.time_alert').classList.remove('hidden')
+			} else {
+            	qS('.time_alert').classList.add('hidden');
+			}
 		}
-		if (hours == 0 && mins <= 0 && secs <= 15) {
-			document.getElementsByClassName('timer')[0].classList.add('timesUp')
+		if (hours === 0 && mins <= 0 && secs <= 15) {
+            getEBCN('timer')[0].classList.add('timesUp')
 		}
 		if ((hours <= 0 && mins <= 0 && secs <= 1)) {
-			document.getElementsByClassName('timer-secs')[0].innerText = '00';
+            getEBCN('timer-secs')[0].innerText = '00';
 			return
 		}
-
-		secs--
+        i++;
+		secs--;
 		if (secs <= 0) {
 			secs = 59;
-			mins--
+			mins--;
 			if(mins <= 0) {
-				mins = 59
+				if (hours > 0) {
+                    mins = 59;
+				} else {
+                    mins = 0;
+
+				}
+				hours--;
 				if (hours <= 0) {
 					hours = 0;
 				}
 			}
-		}	
+		}
+
+        if (hours === 0 && mins === 0 && secs === 1) {
+            $.ajax({
+                url: '/game/save-time',
+                type: 'POST',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {"team_id": team_id, "move_id": move_id, "hour": hours, "minutes": mins, "seconds": 0},
+                success:function (data) {}
+            });
+		}
+
+		if (i === 10) {
+			i = 0;
+			$.ajax({
+				url: '/game/save-time',
+				type: 'POST',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+				data: {"team_id": team_id, "move_id": move_id, "hour": hours, "minutes": mins, "seconds": secs},
+				success:function (data) {}
+			});
+		}
 
 		if (hours <= 9) {
-			document.getElementsByClassName('timer-hours')[0].innerText = '0' +  hours
-		}
-		else {
-			document.getElementsByClassName('timer-hours')[0].innerText = hours
+            getEBCN('timer-hours')[0].innerText = '0' +  hours
+		} else {
+            getEBCN('timer-hours')[0].innerText = hours
 		}
 		if (mins <= 9) {
-			document.getElementsByClassName('timer-mins')[0].innerText = '0' + mins
-		}
-		else {
-			document.getElementsByClassName('timer-mins')[0].innerText = mins
+            getEBCN('timer-mins')[0].innerText = '0' + mins
+		} else {
+            getEBCN('timer-mins')[0].innerText = mins
 		}
 
 		if (secs <= 9) {
-			document.getElementsByClassName('timer-secs')[0].innerText = '0' + secs
-		}
-		else {
-			document.getElementsByClassName('timer-secs')[0].innerText = secs
+            getEBCN('timer-secs')[0].innerText = '0' + secs
+		} else {
+            getEBCN('timer-secs')[0].innerText = secs
 		}
 
 	},1000)
 }
 
-var overlay = document.getElementsByClassName('overlay')[0];
+var overlay = getEBCN('overlay')[0];
 
 var trainingPassed = false;
 
@@ -174,40 +204,40 @@ function training() {
  	document.addEventListener('click', activateElement)
 }
 
-if (document.getElementsByClassName('item_wrap')[0]) {
+if (getEBCN('item_wrap')[0]) {
 	if (localStorage.getItem('trainingPassed') == false || localStorage.getItem('trainingPassed') == null) {
 	 	training()
 	 	console.log('начать обучение')
 	} else {
 		console.log('обучение уже пройдено')
 		overlay.classList.add('hidden');
-		document.getElementsByClassName('item_wrap-active')[0].classList.remove('item_wrap-active')
+        getEBCN('item_wrap-active')[0].classList.remove('item_wrap-active')
 		timer()	
 	}
 }
 function modalsControl(e){
 	if (e.target.classList.contains('new_info_show')) {
-		var modal = document.getElementsByClassName('new-info')[0];
+		var modal = getEBCN('new-info')[0];
 		modal.classList.add('modal-active')
 		overlay.classList.remove('hidden')
 	}
-	if (e.target.classList.contains('overlay') && document.getElementsByClassName('modal-active')[0] || e.target.classList.contains('modal_close')) {
-		var modal = document.getElementsByClassName('modal-active')[0];
+	if (e.target.classList.contains('overlay') && getEBCN('modal-active')[0] || e.target.classList.contains('modal_close')) {
+		var modal = getEBCN('modal-active')[0];
 		modal.classList.remove('modal-active')
 		overlay.classList.add('hidden')
 	}
 	if (e.target.classList.contains('alert_show')) {
-		var modal = document.getElementsByClassName('alert')[0];
+		var modal = getEBCN('alert')[0];
 		modal.classList.add('modal-active')
 		overlay.classList.remove('hidden')
 	}
 	if (e.target.classList.contains('form_show')) {
-		var modal = document.getElementsByClassName('modal-form')[0];
+		var modal = getEBCN('modal-form')[0];
 		modal.classList.add('modal-active')
 		overlay.classList.remove('hidden')
 	}
 	if (e.target.classList.contains('time_show')) {
-		var modal = document.getElementsByClassName('time_alert')[0];
+		var modal = getEBCN('time_alert')[0];
 		modal.classList.remove('hidden')
 	}
 }
@@ -226,7 +256,7 @@ function teamChoosing(e) {
 document.addEventListener("change", teamChoosing)
 
 function resultAnimation(){
-	var circle = document.getElementsByClassName('circle_progress')[0];
+	var circle = getEBCN('circle_progress')[0];
 	var radius = circle.r.baseVal.value; 
 	var circumference = 2 * Math.PI * radius;
 
@@ -238,9 +268,9 @@ function resultAnimation(){
 		circle.style.strokeDashoffset = offset;
 	}
 
-	var result = document.getElementsByClassName('result_value')[0].value;
+	var result = getEBCN('result_value')[0].value;
 	var n = 0;
-	var number = document.getElementsByClassName('result_counter')[0];
+	var number = getEBCN('result_counter')[0];
 	var animation = setInterval(function() {
 		if(n >= result) {
 			clearInterval(animation)
@@ -306,3 +336,19 @@ function removeImg(e) {
 }
 
 document.addEventListener('click', removeImg)
+
+function getEBCN(el) {
+	return document.getElementsByClassName(el)
+}
+
+function getId(el) {
+	return document.getElementById(el);
+}
+
+function qS(el) {
+	return document.querySelector(el);
+}
+
+function c(str) {
+	console.log(str);
+}
