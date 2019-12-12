@@ -24,7 +24,7 @@
             @foreach($teams as $team)
                 <li>
                     <label>
-                        <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden">
+                        <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden" @if ('1' === $team->status) disabled @endif>
                         <span class="team_logo"><img src="{{ asset(env('THEME')) }}/img/{{$team->icon}}" alt=""></span>
                         <span class="team_name">{{$team->team}}</span>
                     </label>
