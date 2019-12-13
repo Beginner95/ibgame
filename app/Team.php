@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+    protected $fillable = [
+        'team', 'description', 'icon', 'status'
+    ];
+
     public function resources()
     {
         return $this->hasMany(Resource::class)->orderBy('id', 'DESC');
