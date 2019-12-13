@@ -16,3 +16,8 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@login');
     Route::get('logout', 'LoginController@logout')->name('logout');
 });
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::resource('/game', 'GameController')->name('game');
+});
