@@ -6,6 +6,9 @@
 </script> <!-- jQuery -->
 <script src='{{ asset(env('THEME')) }}/js/jquery.vide.js'></script>
 <script src="{{ asset(env('THEME')) }}/js/main.js"></script> <!-- main scripts -->
+@if (Request::route()->getName() == 'admin.index')
+    <script src="{{ asset(env('THEME')) }}/js/admin_main.js"></script>
+@endif
 <!-- scripts -->
 </body>
 </html>
