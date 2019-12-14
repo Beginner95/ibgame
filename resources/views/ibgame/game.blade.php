@@ -76,7 +76,7 @@
             </div>
             {{ Form::open(['url' => '/game/answer', 'method' => 'post']) }}
                 <input type="hidden" id="team_id" name="team-id" value="{{$team->id}}">
-                <input type="hidden" id="move_id" name="move-id" value="{{$move->id}}">
+                <input type="hidden" id="move" name="move" value="{{$move->move}}">
                 <textarea name="answer" class="item_content item_content-input" required></textarea>
                 <button class="btn btn-blue">Отправить</button>
             {{ Form::close() }}

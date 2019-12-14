@@ -73,11 +73,10 @@ class GameController extends Controller
 
     public function saveTime(Request $request)
     {
-        $team_id = $request['team_id'];
-        $move_id = $request['move_id'];
+        $move = $request['move'];
         $time = $request['hour'] . ':' . $request['minutes'] . ':' . $request['seconds'];
         $playTime = Carbon::parse($time)->format('H:i:s');
-        Move::where('id', $move_id)->where('team_id', $team_id)->update(['play_time' => $playTime]);
+        Move::where('move', $move)->update(['play_time' => $playTime]);
     }
 
     public function answer(Request $request)

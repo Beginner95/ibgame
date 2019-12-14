@@ -88,8 +88,7 @@ function timer() {
 	var mins = parseInt(getEBCN('timer-mins')[0].innerText);
 	var secs = parseInt(getEBCN('timer-secs')[0].innerText);
 	let i = 0;
-	let team_id = getId('team_id').value;
-	let move_id = getId('move_id').value;
+	let move = getId('move').value;
 	var timer = setInterval(function(){
 
 		if (hours === 0 && mins <= 1) {
@@ -131,7 +130,7 @@ function timer() {
                 url: '/game/save-time',
                 type: 'POST',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data: {"team_id": team_id, "move_id": move_id, "hour": hours, "minutes": mins, "seconds": 0},
+                data: {"move": move, "hour": hours, "minutes": mins, "seconds": 0},
                 success:function (data) {}
             });
 		}
@@ -142,7 +141,7 @@ function timer() {
 				url: '/game/save-time',
 				type: 'POST',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-				data: {"team_id": team_id, "move_id": move_id, "hour": hours, "minutes": mins, "seconds": secs},
+				data: {"move": move, "hour": hours, "minutes": mins, "seconds": secs},
 				success:function (data) {}
 			});
 		}
