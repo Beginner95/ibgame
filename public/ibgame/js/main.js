@@ -337,15 +337,6 @@ function removeImg(e) {
 
 document.addEventListener('click', removeImg);
 
-const admin_team = qS('.admin_item');
-
-admin_team.addEventListener('click', selectTeam);
-function selectTeam(e) {
-	if (e.target.tagName === 'INPUT') {
-		window.location = '/admin?team=' + e.target.value;
-	}
-}
-
 function getEBCN(el) {
 	return document.getElementsByClassName(el)
 }
