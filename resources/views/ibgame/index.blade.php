@@ -1,6 +1,6 @@
 @extends(env('THEME') . '.layouts.head')
 <div class="loader">
-    <img src="img/loader_icon.png" alt="#">
+    <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
 </div>
 <div class="choose_team d-flex" data-vide-bg="{{ asset(env('THEME')) }}/video/video">
     <header class="header d-flex">
@@ -25,7 +25,9 @@
                 <li>
                     <label>
                         <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden" @if ('1' === $team->status) disabled @endif>
-                        <span class="team_logo"><img src="{{ asset(env('THEME')) }}/img/{{$team->icon}}" alt=""></span>
+                        <span class="team_logo">
+                            <img src="{{ asset(env('THEME')) }}/img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif" alt="">
+                        </span>
                         <span class="team_name">{{$team->team}}</span>
                     </label>
                 </li>
