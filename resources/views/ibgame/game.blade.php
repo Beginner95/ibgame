@@ -1,7 +1,7 @@
 @extends(env('THEME') . '.layouts.head')
 
 <div class="loader">
-    <img src="img/loader_icon.png" alt="#">
+    <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
 </div>
 <div class="date_wrap">
     <date class="date">03 / 11 / 19</date>
