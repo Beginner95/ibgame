@@ -1,4 +1,7 @@
 .idea/
+/public/mix-manifest.json
+/public/css/app.css
+/public/js/app.js
 /node_modules
 /public/hot
 /public/storage
@@ -11,3 +14,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+package-lock.json
