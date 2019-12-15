@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeEvidenceTable extends Migration
+class CreateTeamToEvidenceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class ChangeEvidenceTable extends Migration
      */
     public function up()
     {
-        Schema::table('evidence', function (Blueprint $table) {
+        Schema::create('team_to_evidence', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('team_id')->unsigned();
+            $table->bigInteger('evidence_id')->unsigned();
+
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('evidence_id')->references('id')->on('evidences');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +31,6 @@ class ChangeEvidenceTable extends Migration
      */
     public function down()
     {
-        Schema::table('evidence', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('team_to_evidence');
     }
 }

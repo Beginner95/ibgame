@@ -13,7 +13,7 @@ class CreateEvidenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('evidence', function (Blueprint $table) {
+        Schema::create('evidences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('clue', 255);
             $table->char('status', 1)->nullable();

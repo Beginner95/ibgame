@@ -19,6 +19,10 @@ class CreateMovesTable extends Migration
             $table->time('play_time')->nullable();
             $table->timestamp('play_time_start')->nullable();
             $table->char('status', '1')->nullable();
+
+            $table->bigInteger('team_id')->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams');
+
             $table->timestamps();
         });
     }

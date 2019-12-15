@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeTriggersTable extends Migration
+class CreateTeamToEventoptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class ChangeTriggersTable extends Migration
      */
     public function up()
     {
-        Schema::table('triggers', function (Blueprint $table) {
+        Schema::create('team_to_event_option', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('team_id')->unsigned();
+            $table->bigInteger('event_option_id')->unsigned();
+
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('event_option_id')->references('id')->on('event_options');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +31,6 @@ class ChangeTriggersTable extends Migration
      */
     public function down()
     {
-        Schema::table('triggers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('team_to_event_option');
     }
 }

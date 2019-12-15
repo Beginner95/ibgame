@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeMovesTable extends Migration
+class CreateTeamToTriggerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class ChangeMovesTable extends Migration
      */
     public function up()
     {
-        Schema::table('moves', function (Blueprint $table) {
+        Schema::create('team_to_trigger', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('team_id')->unsigned();
+            $table->bigInteger('trigger_id')->unsigned();
+
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('trigger_id')->references('id')->on('triggers');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +31,6 @@ class ChangeMovesTable extends Migration
      */
     public function down()
     {
-        Schema::table('moves', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('team_to_trigger');
     }
 }

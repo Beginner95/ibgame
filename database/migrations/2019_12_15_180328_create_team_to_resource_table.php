@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHelpTable extends Migration
+class CreateTeamToResourceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateHelpTable extends Migration
      */
     public function up()
     {
-        Schema::create('help', function (Blueprint $table) {
+        Schema::create('team_to_resource', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 255);
-            $table->text('description');
-            $table->string('for', 255);
+            $table->bigInteger('team_id')->unsigned();
+            $table->bigInteger('resource_id')->unsigned();
+
+            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('resource_id')->references('id')->on('resources');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateHelpTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('help');
+        Schema::dropIfExists('team_to_resource');
     }
 }

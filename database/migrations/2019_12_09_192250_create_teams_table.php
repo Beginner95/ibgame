@@ -17,6 +17,8 @@ class CreateTeamsTable extends Migration
             $table->bigIncrements('id');
             $table->string('team', 255);
             $table->text('description');
+            $table->string('icon', 200);
+            $table->char('status', 1);
             $table->timestamps();
         });
     }

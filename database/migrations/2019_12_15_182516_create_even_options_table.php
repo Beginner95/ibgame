@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeResourcesTable extends Migration
+class CreateEvenOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class ChangeResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::table('resources', function (Blueprint $table) {
-            $table->bigInteger('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams');
+        Schema::create('event_options', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name', 255);
+            $table->text('description');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class ChangeResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::table('resources', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('event_options');
     }
 }
