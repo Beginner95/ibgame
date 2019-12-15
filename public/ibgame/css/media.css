@@ -180,7 +180,7 @@
 		flex-wrap: wrap;
 	}
 	.admin_item-main-block {
-		max-width: 100%;
+		width: 100%;
 		margin: 10px 0;
 	}
 	.team_name {
