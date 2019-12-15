@@ -19,5 +19,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::resource('/game', 'GameController')->name('game');
+    Route::resource('/game', 'GameController');
+    Route::post('/game/resource', 'GameController@resource')->name('game.resource');
+    Route::post('/game/evidence', 'GameController@evidence')->name('game.evidence');
 });
