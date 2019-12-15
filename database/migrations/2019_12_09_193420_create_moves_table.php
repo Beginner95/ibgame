@@ -17,6 +17,7 @@ class CreateMovesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('move');
             $table->time('play_time')->nullable();
+            $table->timestamp('play_time_start')->nullable();
             $table->char('status', '1')->nullable();
             $table->timestamps();
         });
