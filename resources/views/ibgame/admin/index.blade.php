@@ -93,46 +93,14 @@
                 <button class="add_team">+</button>
             </div>
             <div class="variants_grid">
-                <div class="variant_item">
-                    <h3 class="variant_name">
-                        Вариант 1
-                    </h3>
-                    <button class="variant_edit"></button>
-                    <button class="variant_delete"></button>
-                    <div class="variant_text">
-                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
+                @foreach ($eventOptions as $eventOption)
+                    <div class="variant_item">
+                        <h3 class="variant_name">{{$eventOption->name}}</h3>
+                        <button class="variant_edit"></button>
+                        <button class="variant_delete"></button>
+                        <div class="variant_text">{{$eventOption->description}}</div>
                     </div>
-                </div>
-                <div class="variant_item">
-                    <h3 class="variant_name">
-                        Вариант 1
-                    </h3>
-                    <button class="variant_edit"></button>
-                    <button class="variant_delete"></button>
-                    <div class="variant_text">
-                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
-                    </div>
-                </div>
-                <div class="variant_item">
-                    <h3 class="variant_name">
-                        Вариант 1
-                    </h3>
-                    <button class="variant_edit"></button>
-                    <button class="variant_delete"></button>
-                    <div class="variant_text">
-                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
-                    </div>
-                </div>
-                <div class="variant_item">
-                    <h3 class="variant_name">
-                        Вариант 1
-                    </h3>
-                    <button class="variant_edit"></button>
-                    <button class="variant_delete"></button>
-                    <div class="variant_text">
-                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="training_modal">
@@ -154,7 +122,7 @@
                 </div>
                 <div class="item_content">
                     <ul class="resources_list">
-                        @foreach ($team->resources as $resource)
+                        @foreach ($resources as $resource)
                             <li>{{$resource->resource}}</li>
                         @endforeach
                     </ul>
@@ -176,8 +144,8 @@
                 </div>
                 <div class="item_content">
                     <ul class="evidence_list">
-                        @foreach($team->evidence as $evidendce)
-                            <li>{{$evidendce->clue}}</li>
+                        @foreach($evidences as $evidence)
+                            <li>{{$evidence->clue}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -198,7 +166,7 @@
                 </div>
                 <div class="item_content">
                     <ul class="trigger_list">
-                        @foreach($team->triggers as $trigger)
+                        @foreach($triggers as $trigger)
                             <li>{{$trigger->trigger}}</li>
                         @endforeach
                     </ul>
