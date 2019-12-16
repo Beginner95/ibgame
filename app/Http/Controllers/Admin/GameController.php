@@ -37,11 +37,11 @@ class GameController extends Controller
         if ($save_send == 'send') {
             $this->sendResource($resource_name, $team_id);
         } else {
-            $this->saveResourse($resource_name);
+            $this->saveResource($resource_name);
         }
     }
 
-    private function saveResourse($name)
+    private function saveResource($name)
     {
         $resource = Resource::where('resource', $name)->first();
         if (!empty($resource)) return $resource->id;
@@ -55,7 +55,7 @@ class GameController extends Controller
     {
 
         $teamResource = new TeamResource();
-        $teamResource->resourse_id = $this->saveResourse($name);
+        $teamResource->resourse_id = $this->saveResource($name);
         $teamResource->team_id = $team_id;
         $teamResource->save();
     }
