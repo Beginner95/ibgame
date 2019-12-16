@@ -22,4 +22,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('/game', 'GameController');
     Route::post('/game/resource', 'GameController@resource')->name('game.resource');
     Route::post('/game/evidence', 'GameController@evidence')->name('game.evidence');
+
+    Route::post('/event-option', 'EventOptionController@store')->name('event.option');
+    Route::get('/event-option/destroy/{id}', 'EventOptionController@destroy')->name('event.option.destroy');
 });

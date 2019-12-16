@@ -90,14 +90,20 @@
         <section class="admin_item item admin_item-variants">
             <div class="item_header item_header-variants d-flex">
                 <h2 class="item_name">Варианты развития событий</h2>
-                <button class="add_team">+</button>
+                <button class="add_team add_event_option">+</button>
             </div>
             <div class="variants_grid">
                 @foreach ($eventOptions as $eventOption)
+                    @php $style = ''; @endphp
+                    @foreach($team->eventOptions as $option)
+                        @if ($option->id === $eventOption->id)
+                            @php $style = 'style=display:none;'; @endphp
+                        @endif
+                    @endforeach
                     <div class="variant_item">
                         <h3 class="variant_name">{{$eventOption->name}}</h3>
-                        <button class="variant_edit"></button>
-                        <button class="variant_delete"></button>
+                        <button id="{{ $eventOption->id }}" class="variant_edit" {{$style}}></button>
+                        <a href="{{ route('admin.event.option.destroy', [$eventOption->id]) }}" class="variant_delete"></a>
                         <div class="variant_text">{{$eventOption->description}}</div>
                     </div>
                 @endforeach
@@ -301,7 +307,26 @@
     {{ Form::close() }}
 </div>
 {{--End modal Add Trigger--}}
-
+{{--Start modal Add Event option--}}
+<div class="modal event_option_add_form d-flex">
+    {{ Form::open(['route' => 'admin.event.option', 'method' => 'post', 'onsubmit' => 'return checkForm(this)'])  }}
+    <h4 class="modal_heading">Добавление варианта развития события</h4>
+    <label>Имя варианта
+        <input type="text" name="name-event-option" class="item_content_team item_content-input">
+    </label>
+    <input type="hidden" name="save-send" value="save">
+    <input type="hidden" name="team-id" value="{{$team->id}}">
+    <input type="hidden" name="event-option-id" value="">
+    <div class="modal_content">
+        <label>Описание варианта
+            <textarea name="description-event-option" class="item_content item_content-input" style="height: 100px;"></textarea>
+        </label>
+    </div>
+    <button class="btn btn-blue save_event_option" style="float: left;">Сохранить</button>
+    <button class="btn btn-blue send_event_option" style="float: right;">Отправить</button>
+    {{ Form::close() }}
+</div>
+{{--End modal Add Event option--}}
 <div class="modal alert d-flex">
     <h4 class="modal_heading">
         Внимание!

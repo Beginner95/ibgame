@@ -29,4 +29,9 @@ class Team extends Model
     {
         return $this->hasMany(Move::class);
     }
+
+    public function eventOptions()
+    {
+        return $this->belongsToMany(EventOption::class, 'team_to_event_option')->withTimestamps();
+    }
 }
