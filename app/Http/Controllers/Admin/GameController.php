@@ -28,38 +28,6 @@ class GameController extends Controller
 
     }
 
-    public function resource(Request $request)
-    {
-        $resource_name = $request['resource'];
-        $save_send = $request['save-send'];
-        $team_id = $request['team-id'];
-        if (empty($resource_name)) return back();
-        if ($save_send == 'send') {
-            $this->sendResource($resource_name, $team_id);
-        } else {
-            $this->saveResource($resource_name);
-        }
-    }
-
-    private function saveResource($name)
-    {
-        $resource = Resource::where('resource', $name)->first();
-        if (!empty($resource)) return $resource->id;
-        $resource = new Resource();
-        $resource->resource = $name;
-        $resource->save();
-        return $resource->id;
-    }
-
-    private function sendResource($name, $team_id)
-    {
-
-        $teamResource = new TeamResource();
-        $teamResource->resourse_id = $this->saveResource($name);
-        $teamResource->team_id = $team_id;
-        $teamResource->save();
-    }
-
     public function store(Request $request)
     {
         $teamName = $request['name'];
