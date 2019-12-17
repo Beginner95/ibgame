@@ -880,8 +880,12 @@
 	text-align: left;
 }
 
-.add_team_content label input, .add_team_content label textarea {
+.add_team_content label input, .add_team_content label textarea, .event_option_add_form label input, .event_option_add_form label textarea {
 	margin: 8px 0;
+}
+
+.event_option_add_form .modal_heading {
+	padding: 10px 0;
 }
 
 .mini-input {
