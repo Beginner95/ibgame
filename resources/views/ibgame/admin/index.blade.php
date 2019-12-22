@@ -308,11 +308,11 @@
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
             <textarea name="trigger-name" class="item_content item_content-input"></textarea>
-            <label class="files_wrap d-flex">
-                <input type="file" name="trigger" class='visually_hidden fileMulti'>
-                <span class="btn btn-blue">Приложить файлы</span>
+            <label class="files_wrap d-flex" data-id="trigger">
+                <input type="file" name="trigger" class='visually_hidden fileMulti trigger'>
+                <span class="btn btn-blue file-trigger">Приложить файлы</span>
             </label>
-            <div class="output_wrap d-flex">
+            <div class="output_wrap trigger d-flex">
                 <span>Добавлено:</span>
                 <div class="output_files"></div>
             </div>

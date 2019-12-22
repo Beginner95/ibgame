@@ -56,19 +56,34 @@ function modalsControl(e){
             qS('input[name="trigger-id"]').value = e.target.dataset.triggerId;
 
             let file = e.target.dataset.triggerFile;
-
+            let file_trigger = qS('.file-trigger');
             if (file !== '') {
                 let link_file = createElem('a');
+                addClass(link_file, 'link-file-trigger');
                 link_file.href = '/file/trigger/' + file;
                 link_file.append('Скачать файл');
-                qS('input[name="trigger"]').replaceWith(link_file);
-                link_file.parentNode.childNodes[3].remove();
+                addStyle(link_file, 'display:block');
+                if (file_trigger === null) {
+                    link_file.href = '/file/trigger/' + file;
+                } else {
+                    file_trigger.replaceWith(link_file);
+                }
+                addStyle(qS('.link-file-trigger'), 'display:block');
             } else {
-                qS('input[name="trigger"]').parentNode.remove();
+                if (qS('input[name="trigger"]') !== null) {
+                    addStyle(qS('input[name="trigger"]'), 'display:none');
+                    if (file_trigger !== null) {
+                        addStyle(file_trigger, 'display:none');
+                    } else {
+                        addStyle(qS('.link-file-trigger'), 'display:none');
+                    }
+                }
             }
 
             if (e.target.dataset.existTrigger === '1') {
-                qS('.send_trigger').remove();
+                addStyle(qS('.send_trigger'), 'display:none');
+            } else {
+                addStyle(qS('.send_trigger'), 'display:block');
             }
 
             let btn = qS('.save_trigger');
