@@ -34,7 +34,7 @@ class UploadFile
         return null;
     }
 
-    public function deleteCurrentImage($currentFile, $key)
+    public function deleteCurrentFile($currentFile, $key)
     {
         if (true === $this->fileExists($currentFile, $key)) {
             unlink(public_path($this->array_path[$key] . $currentFile));
