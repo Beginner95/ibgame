@@ -173,7 +173,13 @@
                 <div class="item_content">
                     <ul class="trigger_list">
                         @foreach($triggers as $trigger)
-                            <li>{{$trigger->trigger}}</li>
+                            @php $status = 'data-exist-trigger=0'; @endphp
+                            @foreach($team->triggers as $t)
+                                @if ($t->id === $trigger->id)
+                                    @php $status = 'data-exist-trigger=1'; @endphp
+                                @endif
+                            @endforeach
+                            <li data-trigger-id="{{ $trigger->id }}" data-trigger-file="{{ $trigger->file }}" {{$status}}>{{$trigger->trigger}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -287,21 +293,22 @@
 {{--End modal Add Evidence--}}
 {{--Start modal Add Trigger--}}
 <div class="modal trigger_add_form d-flex">
-    {{ Form::open(['route' => 'admin.game.evidence', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
+    {{ Form::open(['route' => 'admin.add.trigger', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
     <h4 class="modal_heading">Добавление триггера</h4>
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
-            <label>Имя ресурса
-                <input type="text" name="evidence" class="item_content_team item_content-input">
+            <label>Описание триггера
+                <input type="text" name="trigger-name" class="item_content_team item_content-input">
             </label>
             <label class="files_wrap d-flex">
-                <input type="file" name="file-evidence" class='visually_hidden fileMulti'>
+                <input type="file" name="trigger" class='visually_hidden fileMulti'>
                 <span class="btn btn-blue">Файл ресурса</span>
             </label>
         </div>
     </div>
     <input type="hidden" name="save-send" value="save">
     <input type="hidden" name="team-id" value="{{$team->id}}">
+    <input type="hidden" name="trigger-id" value="">
     <button class="btn btn-blue save_trigger" style="float: left;">Сохранить</button>
     <button class="btn btn-blue send_trigger">Отправить</button>
     {{ Form::close() }}

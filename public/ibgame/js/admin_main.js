@@ -14,9 +14,37 @@ function modalsControl(e){
         showModal(form);
     }
 
-    if (e.target.classList.contains('add_trigger')) {
+    if (e.target.classList.contains('add_trigger') || e.target.parentNode.classList.contains('trigger_list')) {
         let form = qS('.trigger_add_form');
         showModal(form);
+        if (e.target.parentNode.classList.contains('trigger_list')) {
+            qS('input[name="trigger-name"]').value = e.target.innerText;
+            qS('input[name="trigger-id"]').value = e.target.dataset.triggerId;
+
+            let file = e.target.dataset.triggerFile;
+
+            if (file !== '') {
+                let link_file = createElem('a');
+                link_file.href = '/file/trigger/' + file;
+                link_file.append('Скачать файл');
+                qS('input[name="trigger"]').replaceWith(link_file);
+                link_file.parentNode.childNodes[3].remove();
+            } else {
+                qS('input[name="trigger"]').parentNode.remove();
+            }
+
+            if (e.target.dataset.existTrigger === '1') {
+                qS('.send_trigger').remove();
+            }
+
+            let btn = qS('.save_trigger');
+            let remove_link = createElem('a');
+            addClass(remove_link, 'btn btn-blue save_trigger');
+            addStyle(remove_link, 'float: left;');
+            remove_link.href = '/admin/trigger/destroy/' + e.target.dataset.triggerId + '';
+            remove_link.append('Удалить');
+            btn.replaceWith(remove_link);
+        }
     }
 
     if (e.target.classList.contains('add_event_option') || e.target.classList.contains('variant_edit')) {
@@ -75,9 +103,9 @@ function checkForm(form) {
     }
 
     if (form.childNodes[2].innerText === 'Добавление триггера') {
-        let resource_name = qS('input[name="resource"]').value;
-        if (resource_name === '') alert('Необходимо добавить название триггера');
-        return !(resource_name === '');
+        let trigger_name = qS('input[name="trigger"]').value;
+        if (trigger_name === '') alert('Необходимо добавить название триггера');
+        return !(trigger_name === '');
     }
 
     if (form.childNodes[2].innerText === 'Добавление варианта развития события') {
@@ -97,4 +125,16 @@ function selectTeam(e) {
     if (e.target.tagName === 'INPUT') {
         window.location = '/admin?team=' + e.target.value;
     }
+}
+
+function createElem(el) {
+    return document.createElement(el);
+}
+
+function addStyle(el, stl) {
+    return el.style = stl
+}
+
+function addClass(el, cls) {
+    return el.className = cls
 }

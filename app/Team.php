@@ -17,7 +17,7 @@ class Team extends Model
 
     public function triggers()
     {
-        return $this->hasMany(Trigger::class)->orderBy('id', 'DESC');
+        return $this->belongsToMany(Trigger::class, 'team_to_trigger')->orderBy('id', 'DESC')->withTimestamps();
     }
 
     public function evidence()
