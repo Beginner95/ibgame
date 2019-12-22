@@ -3,21 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Move;
-use App\Resource;
 use App\Team;
+use App\UploadFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 
 class GameController extends Controller
 {
-    public $array_path = [
-        'icon' => 'ibgame/img/',
-        'resource' => 'ibgaem/file/resource/',
-        'evidence' => 'ibgame/file/evidence/',
-        'trigger' => 'ibgame/file/trigger/'
-    ];
-
     public function index()
     {
         //
@@ -37,10 +29,11 @@ class GameController extends Controller
 
         if (empty($teamName) || empty($moves) || empty($teamDescription)) return back();
 
+        $upFile = new UploadFile();
         $team = new Team();
         $team->team = $teamName;
         $team->description = $teamDescription;
-        $team->icon = $this->uploadFile('icon');
+        $team->icon = $upFile->uploadFile('icon');
         $team->status = 0;
         $team->save();
         $team_id = $team->id;
@@ -89,33 +82,5 @@ class GameController extends Controller
 
     public function destroy($id)
     {
-    }
-
-    public function uploadFile($key)
-    {
-
-        if (Input::file($key)) {
-            $input = Input::file($key);
-            $extension = $input->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
-            $destinationPath = public_path($this->array_path[$key]);
-            $input->move($destinationPath, $fileName);
-            return $fileName;
-        }
-        return null;
-    }
-
-    public function deleteCurrentImage($currentFile, $key)
-    {
-        if (true === $this->fileExists($currentFile, $key)) {
-            unlink(public_path($this->array_path[$key] . $currentFile));
-        }
-    }
-
-    private  function fileExists($currentFile, $key)
-    {
-        if (!empty($currentFile) && $currentFile != null) {
-            return file_exists(public_path($this->array_path[$key] . $currentFile));
-        }
     }
 }
