@@ -15,9 +15,9 @@ class UploadFile
 {
     public $array_path = [
         'icon' => 'ibgame/img/',
-        'resource' => 'ibgaem/file/resource/',
-        'evidence' => 'ibgame/file/evidence/',
-        'trigger' => 'ibgame/file/trigger/'
+        'resource' => 'file/resource/',
+        'evidence' => 'file/evidence/',
+        'trigger' => 'file/trigger/'
     ];
 
     public function uploadFile($key)
