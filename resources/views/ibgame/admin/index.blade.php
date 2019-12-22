@@ -292,25 +292,28 @@
 </div>
 {{--End modal Add Evidence--}}
 {{--Start modal Add Trigger--}}
-<div class="modal trigger_add_form d-flex">
+<div class="modal modal-form trigger_add_form d-flex">
     {{ Form::open(['route' => 'admin.add.trigger', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
     <h4 class="modal_heading">Добавление триггера</h4>
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
-            <label>Описание триггера
-                <input type="text" name="trigger-name" class="item_content_team item_content-input">
-            </label>
+            <textarea name="trigger-name" class="item_content item_content-input"></textarea>
             <label class="files_wrap d-flex">
                 <input type="file" name="trigger" class='visually_hidden fileMulti'>
-                <span class="btn btn-blue">Файл ресурса</span>
+                <span class="btn btn-blue">Приложить файлы</span>
             </label>
+            <div class="output_wrap d-flex">
+                <span>Добавлено:</span>
+                <div class="output_files"></div>
+            </div>
         </div>
     </div>
-    <input type="hidden" name="save-send" value="save">
-    <input type="hidden" name="team-id" value="{{$team->id}}">
     <input type="hidden" name="trigger-id" value="">
-    <button class="btn btn-blue save_trigger" style="float: left;">Сохранить</button>
-    <button class="btn btn-blue send_trigger">Отправить</button>
+    <div class="btns_wrap d-flex">
+        <button class="btn btn-blue save_trigger">Сохранить</button>
+        <button class="btn btn-blue send_trigger">Отправить</button>
+        <input type="hidden" name="team-id" value="{{$team->id}}"><input type="hidden" name="save-send" value="save">
+    </div>
     {{ Form::close() }}
 </div>
 {{--End modal Add Trigger--}}

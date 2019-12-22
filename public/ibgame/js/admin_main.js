@@ -18,7 +18,7 @@ function modalsControl(e){
         let form = qS('.trigger_add_form');
         showModal(form);
         if (e.target.parentNode.classList.contains('trigger_list')) {
-            qS('input[name="trigger-name"]').value = e.target.innerText;
+            qS('textarea[name="trigger-name"]').value = e.target.innerText;
             qS('input[name="trigger-id"]').value = e.target.dataset.triggerId;
 
             let file = e.target.dataset.triggerFile;
@@ -103,7 +103,7 @@ function checkForm(form) {
     }
 
     if (form.childNodes[2].innerText === 'Добавление триггера') {
-        let trigger_name = qS('input[name="trigger"]').value;
+        let trigger_name = qS('textarea[name="trigger-name"]').value;
         if (trigger_name === '') alert('Необходимо добавить название триггера');
         return !(trigger_name === '');
     }
