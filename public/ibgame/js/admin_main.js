@@ -9,9 +9,43 @@ function modalsControl(e){
         showModal(form);
     }
 
-    if (e.target.classList.contains('add_evidence')) {
+    if (e.target.classList.contains('add_evidence') || e.target.parentNode.classList.contains('evidence_list')) {
         let form = qS('.evidence_add_form');
         showModal(form);
+        if (e.target.parentNode.classList.contains('evidence_list')) {
+            qS('textarea[name="evidence-name"]').value = e.target.innerText;
+            qS('input[name="evidence-id"]').value = e.target.dataset.evidenceId;
+
+            let file = e.target.dataset.evidenceFile;
+
+            if (file !== '') {
+                let link_file = createElem('a');
+                addClass(link_file, 'link-file-evidence');
+                link_file.href = '/file/evidence/' + file;
+                link_file.append('Скачать файл');
+                if (qS('.file-evidence') === null) {
+                    qS('.link-file-evidence').href = '/file/evidence/' + file;
+                } else {
+                    qS('.file-evidence').replaceWith(link_file);
+                }
+            } else {
+                qS('input[name="evidence"]').parentNode.remove();
+            }
+
+            if (e.target.dataset.existEvidence === '1') {
+                addStyle(qS('.send_evidence'), 'display:none');
+            } else {
+                addStyle(qS('.send_evidence'), 'display:block');
+            }
+
+            let btn = qS('.save_evidence');
+            let remove_link = createElem('a');
+            addClass(remove_link, 'btn btn-blue save_evidence');
+            addStyle(remove_link, 'float: left;');
+            remove_link.href = '/admin/evidence/destroy/' + e.target.dataset.evidenceId + '';
+            remove_link.append('Удалить');
+            btn.replaceWith(remove_link);
+        }
     }
 
     if (e.target.classList.contains('add_trigger') || e.target.parentNode.classList.contains('trigger_list')) {
@@ -97,7 +131,7 @@ function checkForm(form) {
     }
 
     if (form.childNodes[2].innerText === 'Добавление улики') {
-        let resource_name = qS('input[name="resource"]').value;
+        let resource_name = qS('textarea[name="evidence-name"]').value;
         if (resource_name === '') alert('Необходимо добавить название улики');
         return !(resource_name === '');
     }
@@ -138,3 +172,47 @@ function addStyle(el, stl) {
 function addClass(el, cls) {
     return el.className = cls
 }
+
+function adminHandleFileSelect(evt) {
+    let id = evt.target.parentNode.dataset.id;
+    if (evt.target.classList.contains(id)) {
+        addStyle(evt.target.parentNode.nextElementSibling, 'display:flex');
+        var files = [];
+        var file = evt.target.files; // FileList object
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = file[i]; i++) {
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                var reader = new FileReader();
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var span = createElem('span');
+                        span.classList.add('thumb_wrap');
+                        span.innerHTML = ['<img class="thumb" title="', theFile.name, '" src="img/noimg.png" /> <button type="button" class="remove_file">&times;</button>'].join('');
+                        evt.target.parentNode.nextElementSibling.insertBefore(span, null);
+                    };
+                })(f);
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            } else {
+                var reader = new FileReader();
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var span = createElem('span');
+                        span.classList.add('thumb_wrap');
+                        span.innerHTML = ['<img class="thumb" title="', theFile.name, '" src="', e.target.result, '" /> <button type="button" class="remove_file">&times;</button>'].join('');
+                        evt.target.parentNode.nextElementSibling.insertBefore(span, null);
+                    };
+                })(f);
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+            }
+        }
+    }
+}
+
+document.addEventListener('change', adminHandleFileSelect, false);

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Evidence;
+use App\Team;
+use App\UploadFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +38,18 @@ class EvidenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request['evidence-name'];
+        $save_send = $request['save-send'];
+        $team_id = $request['team-id'];
+
+        if (empty($name)) return back();
+
+        if ($save_send == 'send') {
+            $this->sendEvidence($name, $team_id);
+        } else {
+            $this->saveEvidence($name);
+        }
+        return redirect('/admin?team=' . $team_id);
     }
 
     /**
@@ -80,6 +94,36 @@ class EvidenceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trigger = Evidence::where('id', $id)->first();
+        $file = $trigger->file;
+        if (!empty($file)) {
+            $upFile = new UploadFile();
+            $upFile->deleteCurrentFile($file, 'evidence');
+        }
+        $trigger->teams()->detach();
+        $trigger->delete();
+        return back();
+    }
+
+    private function sendEvidence($name, $team_id)
+    {
+        $team = Team::where('id', $team_id)->first();
+        $evidenceId = $this->saveEvidence($name);
+        $team->evidences()->attach($evidenceId);
+        $team->description = $team->description . '<br>' . $name;
+        $team->save();
+    }
+
+    private function saveEvidence($name)
+    {
+        $evidence = Evidence::where('clue', $name)->first();
+        if (!empty($evidence)) return $evidence->id;
+
+        $upFile = new UploadFile();
+        $evidence = new Evidence();
+        $evidence->clue = $name;
+        $evidence->file = $upFile->uploadFile('evidence');
+        $evidence->save();
+        return $evidence->id;
     }
 }

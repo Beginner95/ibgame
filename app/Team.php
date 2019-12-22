@@ -20,9 +20,9 @@ class Team extends Model
         return $this->belongsToMany(Trigger::class, 'team_to_trigger')->orderBy('id', 'DESC')->withTimestamps();
     }
 
-    public function evidence()
+    public function evidences()
     {
-        return $this->hasMany(Evidence::class)->orderBy('id', 'DESC');
+        return $this->belongsToMany(Evidence::class, 'team_to_evidence')->orderBy('id', 'DESC')->withTimestamps();
     }
 
     public function moves()

@@ -21,7 +21,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('/game', 'GameController');
     Route::post('/game/resource', 'GameController@resource')->name('game.resource');
-    Route::post('/game/evidence', 'GameController@evidence')->name('game.evidence');
+
+    Route::post('/evidence', 'EvidenceController@store')->name('add.evidence');
+    Route::get('/evidence/destroy/{id}', 'EvidenceController@destroy')->name('evidence.destroy');
 
     Route::post('/trigger', 'TriggerController@store')->name('add.trigger');
     Route::get('/trigger/destroy/{id}', 'TriggerController@destroy')->name('trigger.destroy');

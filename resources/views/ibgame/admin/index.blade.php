@@ -151,7 +151,13 @@
                 <div class="item_content">
                     <ul class="evidence_list">
                         @foreach($evidences as $evidence)
-                            <li>{{$evidence->clue}}</li>
+                            @php $status = 'data-exist-evidence=0'; @endphp
+                            @foreach($team->evidences as $e)
+                                @if ($e->id === $evidence->id)
+                                    @php $status = 'data-exist-evidence=1'; @endphp
+                                @endif
+                            @endforeach
+                            <li data-evidence-id="{{ $evidence->id }}" data-evidence-file="{{ $evidence->file }}" {{$status}}>{{$evidence->clue}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -270,24 +276,28 @@
 </div>
 {{--End modal Add Resources--}}
 {{--Start modal Add Evidence--}}
-<div class="modal evidence_add_form d-flex">
-    {{ Form::open(['route' => 'admin.game.evidence', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
+<div class="modal modal-form evidence_add_form d-flex">
+    {{ Form::open(['route' => 'admin.add.evidence', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
     <h4 class="modal_heading">Добавление улики</h4>
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
-            <label>Имя ресурса
-                <input type="text" name="evidence" class="item_content_team item_content-input">
+            <textarea name="evidence-name" class="item_content item_content-input"></textarea>
+            <label class="files_wrap d-flex" data-id="evidence">
+                <input type="file" name="evidence" class='visually_hidden evidence'>
+                <span class="btn btn-blue file-evidence">Приложить файлы</span>
             </label>
-            <label class="files_wrap d-flex">
-                <input type="file" name="file-evidence" class='visually_hidden fileMulti'>
-                <span class="btn btn-blue">Файл ресурса</span>
-            </label>
+            <div class="output_wrap evidence d-flex">
+                <span>Добавлено:</span>
+                <div class="output_files"></div>
+            </div>
         </div>
     </div>
-    <input type="hidden" name="save-send" value="save">
-    <input type="hidden" name="team-id" value="{{$team->id}}">
-    <button class="btn btn-blue save_evidence" style="float: left;">Сохранить</button>
-    <button class="btn btn-blue send_evidence">Отправить</button>
+    <input type="hidden" name="evidence-id" value="">
+    <div class="btns_wrap d-flex">
+        <button class="btn btn-blue save_evidence">Сохранить</button>
+        <button class="btn btn-blue send_evidence">Отправить</button>
+        <input type="hidden" name="team-id" value="{{$team->id}}"><input type="hidden" name="save-send" value="save">
+    </div>
     {{ Form::close() }}
 </div>
 {{--End modal Add Evidence--}}
