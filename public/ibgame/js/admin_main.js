@@ -17,19 +17,27 @@ function modalsControl(e){
             qS('input[name="evidence-id"]').value = e.target.dataset.evidenceId;
 
             let file = e.target.dataset.evidenceFile;
-
+            let file_evidence = qS('.file-evidence');
             if (file !== '') {
                 let link_file = createElem('a');
                 addClass(link_file, 'link-file-evidence');
                 link_file.href = '/file/evidence/' + file;
                 link_file.append('Скачать файл');
-                if (qS('.file-evidence') === null) {
+                if (file_evidence === null) {
                     qS('.link-file-evidence').href = '/file/evidence/' + file;
                 } else {
-                    qS('.file-evidence').replaceWith(link_file);
+                    file_evidence.replaceWith(link_file);
                 }
+                addStyle(qS('.link-file-evidence'), 'display:block');
             } else {
-                qS('input[name="evidence"]').parentNode.remove();
+                if (qS('input[name="evidence"]') !== null) {
+                    addStyle(qS('input[name="evidence"]'), 'display:none');
+                    if (file_evidence !== null) {
+                        addStyle(file_evidence, 'display:none');
+                    } else {
+                        addStyle(qS('.link-file-evidence'), 'display:none');
+                    }
+                }
             }
 
             if (e.target.dataset.existEvidence === '1') {
@@ -64,7 +72,7 @@ function modalsControl(e){
                 link_file.append('Скачать файл');
                 addStyle(link_file, 'display:block');
                 if (file_trigger === null) {
-                    link_file.href = '/file/trigger/' + file;
+                    qS('.link-file-trigger').href = '/file/trigger/' + file;
                 } else {
                     file_trigger.replaceWith(link_file);
                 }
