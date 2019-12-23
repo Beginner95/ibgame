@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Resource;
+use App\Team;
+use App\UploadFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,7 +38,7 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        $resource_name = $request['resource'];
+        $resource_name = $request['resource-name'];
         $save_send = $request['save-send'];
         $team_id = $request['team-id'];
         if (empty($resource_name)) return back();
@@ -90,9 +92,14 @@ class ResourceController extends Controller
      */
     public function destroy($id)
     {
-        $resource = Resource::where('id', $id)->first();
-        $resource->teams()->detach();
-        $resource->delete();
+        $trigger = Resource::where('id', $id)->first();
+        $file = $trigger->file;
+        if (!empty($file)) {
+            $upFile = new UploadFile();
+            $upFile->deleteCurrentFile($file, 'resource');
+        }
+        $trigger->teams()->detach();
+        $trigger->delete();
         return back();
     }
 
@@ -100,15 +107,20 @@ class ResourceController extends Controller
     {
         $team = Team::where('id', $team_id)->first();
         $resourceId = $this->saveResource($name);
-        $team->eventOptions()->attach($resourceId);
+        $team->resources()->attach($resourceId);
+        $team->description = $team->description . '<br>' . $name;
+        $team->save();
     }
 
     private function saveResource($name)
     {
         $resource = Resource::where('resource', $name)->first();
         if (!empty($resource)) return $resource->id;
+
+        $upFile = new UploadFile();
         $resource = new Resource();
         $resource->resource = $name;
+        $resource->file = $upFile->uploadFile('resource');
         $resource->save();
         return $resource->id;
     }

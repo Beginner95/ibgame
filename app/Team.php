@@ -12,7 +12,7 @@ class Team extends Model
 
     public function resources()
     {
-        return $this->hasMany(Resource::class)->orderBy('id', 'DESC');
+        return $this->belongsToMany(Resource::class, 'team_to_resource')->orderBy('id', 'DESC')->withTimestamps();
     }
 
     public function triggers()

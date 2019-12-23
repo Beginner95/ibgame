@@ -129,7 +129,13 @@
                 <div class="item_content">
                     <ul class="resources_list">
                         @foreach ($resources as $resource)
-                            <li>{{$resource->resource}}</li>
+                            @php $status = 'data-exist-resource=0'; @endphp
+                            @foreach($team->resources as $t)
+                                @if ($t->id === $resource->id)
+                                    @php $status = 'data-exist-resource=1'; @endphp
+                                @endif
+                            @endforeach
+                            <li data-resource-id="{{ $resource->id }}" data-resource-file="{{ $resource->file }}" {{$status}}>{{$resource->resource}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -254,24 +260,28 @@
 </div>
 {{--End modal add Team--}}
 {{--Start modal Add Resources--}}
-<div class="modal resource_add_form d-flex">
-    {{ Form::open(['route' => 'admin.game.resource', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
+<div class="modal modal-form resource_add_form d-flex">
+    {{ Form::open(['route' => 'admin.add.resource', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
     <h4 class="modal_heading">Добавление ресурса</h4>
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
-            <label>Имя ресурса
-                <input type="text" name="resource" class="item_content_team item_content-input">
+            <textarea name="resource-name" class="item_content item_content-input"></textarea>
+            <label class="files_wrap d-flex" data-id="resource">
+                <input type="file" name="resource" class='visually_hidden resource'>
+                <span class="btn btn-blue file-resource">Приложить файлы</span>
             </label>
-            <label class="files_wrap d-flex">
-                <input type="file" name="file-resource" class='visually_hidden fileMulti'>
-                <span class="btn btn-blue">Файл ресурса</span>
-            </label>
+            <div class="output_wrap resource d-flex">
+                <span>Добавлено:</span>
+                <div class="output_files"></div>
+            </div>
         </div>
     </div>
-    <input type="hidden" name="save-send" value="save">
-    <input type="hidden" name="team-id" value="{{$team->id}}">
-    <button class="btn btn-blue save_resource" style="float: left;">Сохранить</button>
-    <button class="btn btn-blue send_resource">Отправить</button>
+    <input type="hidden" name="resource-id" value="">
+    <div class="btns_wrap d-flex">
+        <button class="btn btn-blue save_resource">Сохранить</button>
+        <button class="btn btn-blue send_resource">Отправить</button>
+        <input type="hidden" name="team-id" value="{{$team->id}}"><input type="hidden" name="save-send" value="save">
+    </div>
     {{ Form::close() }}
 </div>
 {{--End modal Add Resources--}}

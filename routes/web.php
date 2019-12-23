@@ -20,7 +20,9 @@ Route::group(['namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('/game', 'GameController');
-    Route::post('/game/resource', 'GameController@resource')->name('game.resource');
+
+    Route::post('/resource', 'ResourceController@store')->name('add.resource');
+    Route::get('/resource/destroy/{id}', 'ResourceController@destroy')->name('resource.destroy');
 
     Route::post('/evidence', 'EvidenceController@store')->name('add.evidence');
     Route::get('/evidence/destroy/{id}', 'EvidenceController@destroy')->name('evidence.destroy');

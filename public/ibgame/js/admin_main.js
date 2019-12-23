@@ -4,9 +4,51 @@ function modalsControl(e){
         showModal(form);
     }
 
-    if (e.target.classList.contains('add_resource')) {
+    if (e.target.classList.contains('add_resource') || e.target.parentNode.classList.contains('resources_list')) {
         let form = qS('.resource_add_form');
         showModal(form);
+        if (e.target.parentNode.classList.contains('resources_list')) {
+            qS('textarea[name="resource-name"]').value = e.target.innerText;
+            qS('input[name="resource-id"]').value = e.target.dataset.resourceId;
+
+            let file = e.target.dataset.resourceFile;
+            let file_resource = qS('.file-resource');
+            if (file !== '') {
+                let link_file = createElem('a');
+                addClass(link_file, 'link-file-resource');
+                link_file.href = '/file/evidence/' + file;
+                link_file.append('Скачать файл');
+                if (file_resource === null) {
+                    qS('.link-file-resource').href = '/file/resource/' + file;
+                } else {
+                    file_resource.replaceWith(link_file);
+                }
+                addStyle(qS('.link-file-resource'), 'display:block');
+            } else {
+                if (qS('input[name="resource"]') !== null) {
+                    addStyle(qS('input[name="evidence"]'), 'display:none');
+                    if (file_resource !== null) {
+                        addStyle(file_resource, 'display:none');
+                    } else {
+                        addStyle(qS('.link-file-resource'), 'display:none');
+                    }
+                }
+            }
+
+            if (e.target.dataset.existResource === '1') {
+                addStyle(qS('.send_resource'), 'display:none');
+            } else {
+                addStyle(qS('.send_resource'), 'display:block');
+            }
+
+            let btn = qS('.save_resource');
+            let remove_link = createElem('a');
+            addClass(remove_link, 'btn btn-blue save_resource');
+            addStyle(remove_link, 'float: left;');
+            remove_link.href = '/admin/resource/destroy/' + e.target.dataset.resourceId + '';
+            remove_link.append('Удалить');
+            btn.replaceWith(remove_link);
+        }
     }
 
     if (e.target.classList.contains('add_evidence') || e.target.parentNode.classList.contains('evidence_list')) {
@@ -148,7 +190,7 @@ function checkForm(form) {
     }
 
     if (form.childNodes[2].innerText === 'Добавление ресурса') {
-        let resource_name = qS('input[name="resource"]').value;
+        let resource_name = qS('textarea[name="resource-name"]').value;
         if (resource_name === '') alert('Необходимо добавить название ресурса');
         return !(resource_name === '');
     }
