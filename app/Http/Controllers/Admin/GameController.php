@@ -7,6 +7,7 @@ use App\Team;
 use App\UploadFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class GameController extends Controller
 {
@@ -82,5 +83,18 @@ class GameController extends Controller
 
     public function destroy($id)
     {
+    }
+
+    public function siteMap()
+    {
+        if (Input::file('site-map')) {
+            $input = Input::file('site-map');
+            $extension = $input->getClientOriginalExtension();
+            $fileName = 'map.' . $extension;
+            $destinationPath = public_path('file/site-map/');
+            $input->move($destinationPath, $fileName);
+            return back();
+        }
+        return back();
     }
 }

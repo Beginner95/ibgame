@@ -196,6 +196,15 @@
                     </ul>
                 </div>
             </div>
+            <div>
+                <div class="item_header d-flex">
+                    <h2 class="item_name">Карта сети</h2>
+                    <button class="add_team add_site_map">+</button>
+                </div>
+                <div class="item_content">
+                    <a href="/file/site-map/map.jpg" target="_blank">Просмотреть</a>
+                </div>
+            </div>
         </aside>
         <button class="btn btn-blue next-step">Следующий ход</button>
     </div>
@@ -357,6 +366,28 @@
     {{ Form::close() }}
 </div>
 {{--End modal Add Event option--}}
+{{--Start modal Add site map--}}
+<div class="modal modal-form add_site_map_form d-flex">
+    {{ Form::open(['route' => 'admin.add.site.map', 'method' => 'post', 'files' => true, 'onsubmit' => 'return checkForm(this)'])  }}
+    <h4 class="modal_heading">Добавление карты сети</h4>
+    <div class="modal_content modal_content-form">
+        <div class="add_team_content">
+            <label class="files_wrap d-flex" data-id="trigger">
+                <input type="file" name="site-map" class='visually_hidden fileMulti trigger'>
+                <span class="btn btn-blue file-trigger">Приложить файлы</span>
+            </label>
+            <div class="output_wrap trigger d-flex">
+                <span>Добавлено:</span>
+                <div class="output_files"></div>
+            </div>
+        </div>
+    </div>
+    <div class="btns_wrap d-flex">
+        <button class="btn btn-blue save_site_map" style="margin: 0 auto;">Сохранить</button>
+    </div>
+    {{ Form::close() }}
+</div>
+{{--End modal Add site map--}}
 <div class="modal alert d-flex">
     <h4 class="modal_heading">
         Внимание!

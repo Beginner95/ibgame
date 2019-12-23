@@ -21,6 +21,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('/game', 'GameController');
 
+    Route::post('/game/site-map', 'GameController@siteMap')->name('add.site.map');
+
     Route::post('/resource', 'ResourceController@store')->name('add.resource');
     Route::get('/resource/destroy/{id}', 'ResourceController@destroy')->name('resource.destroy');
 

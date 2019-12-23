@@ -156,6 +156,11 @@ function modalsControl(e){
         }
     }
 
+    if (e.target.classList.contains('add_site_map')) {
+        let form = qS('.add_site_map_form');
+        showModal(form);
+    }
+
     if (e.target.classList.contains('save_resource') ||
         e.target.classList.contains('save_evidence') ||
         e.target.classList.contains('save_trigger') ||
