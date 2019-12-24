@@ -154,6 +154,28 @@
                     <button class="btn btn-gray btn-training">Дальше</button>
                 </div>
             </div>
+
+            <div class="item_wrap" data-order='7'>
+                <div class="item_header d-flex">
+                    <h2 class="item_name">Триггеры</h2>
+                </div>
+                <div class="item_content">
+                    <ul class="trigger_list">
+                        @foreach($team->triggers as $trigger)
+                            <li>{{ $trigger->trigger }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="training_modal">
+                    <h4 class="training_heading">
+                        Что такое триггеры?
+                    </h4>
+                    <p>
+                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
+                    </p>
+                    <button class="btn btn-gray btn-training">Дальше</button>
+                </div>
+            </div>
         </aside>
     </div>
 </div>
