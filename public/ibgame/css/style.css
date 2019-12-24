@@ -289,7 +289,7 @@
 		opacity: 1;
 		border: 2px solid #004CDF;
 	}
-	.step_list li.done:nth-of-type(1) {
+	.step_list li.done {
 		background: rgba(10,172,26,0.2);
 		opacity: 1;
 		border-color: rgba(10,172,26,0.0); 
