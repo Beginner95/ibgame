@@ -239,6 +239,12 @@ function modalsControl(e){
 		var modal = getEBCN('time_alert')[0];
 		modal.classList.remove('hidden')
 	}
+
+	if (e.target.classList.contains('show-site-map')) {
+		let modal = getEBCN('modal-site-map')[0];
+		modal.classList.add('modal-active');
+		overlay.classList.remove('hidden');
+	}
 }
 
 document.addEventListener('click', modalsControl)

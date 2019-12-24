@@ -98,7 +98,7 @@
                         Ресурсы
                     </h2>
                     <div class="item_wrap item_wrap-map"  data-order='2'>
-                        <button class="btn btn-line">
+                        <button class="btn btn-line show-site-map">
                             Открыть карту сети
                         </button>
                         <div class="training_modal">
@@ -219,6 +219,16 @@
         </button>
     </div>
 </div>
+
+{{---Start modal site map---}}
+<div class="modal modal-site-map d-flex" style="max-width: 800px; max-height: 500px;">
+    <div class="modal_content modal_content-form" style="max-width: 725px;">
+        <div class="add_team_content">
+            <img src="/file/site-map/map.jpg" alt="">
+        </div>
+    </div>
+</div>
+{{--End modal site map--}}
 <div class="test d-flex center ">
     <div class="heading_wrap">
         <h4 class="modal_heading">
