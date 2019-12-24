@@ -25,6 +25,12 @@ class IndexController extends Controller
             $team = Team::where('id', $team_id)->first();
         }
 
+        if (empty($team)) {
+            $team = new Team;
+            $team->id = 0;
+            $team->description = null;
+        }
+
         return view(env('THEME') . '.admin.index', [
             'teams' => $teams,
             'team' => $team,
