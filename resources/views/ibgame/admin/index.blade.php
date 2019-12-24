@@ -208,7 +208,11 @@
                 </div>
             </div>
         </aside>
-        <button class="btn btn-blue next-step">Следующий ход</button>
+        {{ Form::open(['route' => 'admin.next.move', 'method' => 'post']) }}
+            <input type="hidden" name="move-id" value="{{ $move->id }}">
+            <input type="hidden" name="team-id" value="{{ $team->id }}">
+            <button class="btn btn-blue next-step">Следующий ход</button>
+        {{ Form::close() }}
     </div>
 </div>
 <div class="overlay hidden"></div>

@@ -34,6 +34,7 @@ class IndexController extends Controller
         return view(env('THEME') . '.admin.index', [
             'teams' => $teams,
             'team' => $team,
+            'move' => $this->getMove($team_id),
             'answer' => $this->getAnswer($team_id),
             'resources' => $this->getResources(),
             'evidences' => $this->getEvidences(),
@@ -44,9 +45,14 @@ class IndexController extends Controller
 
     public function getAnswer($team_id)
     {
-        $move = Move::where('status', 2)->where('team_id', $team_id)->first();
+        $move = Move::where('status', 1)->where('team_id', $team_id)->first();
         if (empty($move)) return null;
         return Answer::where('move_id', $move->id)->orderBy('id', 'DESC')->first();
+    }
+
+    public function getMove($team_id)
+    {
+        return Move::where('status', 1)->where('team_id', $team_id)->first();
     }
 
     public function getResources()
