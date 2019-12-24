@@ -139,8 +139,8 @@
                 </div>
                 <div class="item_content">
                     <ul class="evidence_list">
-                        @foreach($team->evidence as $evidendce)
-                            <li>{{$evidendce->clue}}</li>
+                        @foreach($team->evidences as $evidence)
+                            <li>{{ $evidence->clue }}</li>
                         @endforeach
                     </ul>
                 </div>
