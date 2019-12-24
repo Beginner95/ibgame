@@ -202,7 +202,9 @@
                     <button class="add_team add_site_map">+</button>
                 </div>
                 <div class="item_content">
-                    <a href="/file/site-map/map.jpg" target="_blank">Просмотреть</a>
+                    @if (file_exists(public_path('file/site-map/map.jpg')))
+                        <a href="/file/site-map/map.jpg" target="_blank">Просмотреть</a>
+                    @endif
                 </div>
             </div>
         </aside>
