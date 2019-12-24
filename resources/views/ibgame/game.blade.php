@@ -74,12 +74,16 @@
                     Ваш ответ
                 </h2>
             </div>
-            {{ Form::open(['url' => '/game/answer', 'method' => 'post']) }}
-                <input type="hidden" id="team_id" name="team-id" value="{{$team->id}}">
-                <input type="hidden" id="move" name="move" value="{{$move->move}}">
-                <textarea name="answer" class="item_content item_content-input" required></textarea>
-                <button class="btn btn-blue">Отправить</button>
-            {{ Form::close() }}
+            @if (empty($move->answer->answer))
+                {{ Form::open(['url' => '/game/answer', 'method' => 'post']) }}
+                    <input type="hidden" id="team_id" name="team-id" value="{{$team->id}}">
+                    <input type="hidden" id="move" name="move-id" value="{{$move->id}}">
+                    <textarea name="answer" class="item_content item_content-input" required></textarea>
+                    <button class="btn btn-blue">Отправить</button>
+                {{ Form::close() }}
+            @else
+                <div class="item_content item_content-input">{{ $move->answer->answer }}</div>
+            @endif
             <div class="training_modal">
                 <h4 class="training_heading">
                     Ответ
