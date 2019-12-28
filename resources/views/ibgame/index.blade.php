@@ -18,22 +18,24 @@
         </div>
     </header>
     <h1 class="greeting">Добро пожаловать в игру!</h1>
-    {{ Form::open(['route' => 'game', 'method' => 'get', 'class' => 'teams_wrap']) }}
-        <h3>Выберите свою команду</h3>
-        <ul class="team_list d-flex">
-            @foreach($teams as $team)
-                <li>
-                    <label>
-                        <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden" @if ('1' === $team->status) disabled @endif>
-                        <span class="team_logo">
-                            <img src="{{ asset(env('THEME')) }}/img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif" alt="">
-                        </span>
-                        <span class="team_name">{{$team->team}}</span>
-                    </label>
-                </li>
-            @endforeach
-        </ul>
-        <button class="btn btn-blue">Начать игру</button>
-    {{ Form::close() }}
+    @if (!empty($teams->toArray()))
+        {{ Form::open(['route' => 'game', 'method' => 'get', 'class' => 'teams_wrap']) }}
+            <h3>Выберите свою команду</h3>
+            <ul class="team_list d-flex">
+                @foreach($teams as $team)
+                    <li>
+                        <label>
+                            <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden" @if ('1' === $team->status) disabled @endif>
+                            <span class="team_logo">
+                                <img src="{{ asset(env('THEME')) }}/img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif" alt="">
+                            </span>
+                            <span class="team_name">{{$team->team}}</span>
+                        </label>
+                    </li>
+                @endforeach
+            </ul>
+            <button class="btn btn-blue">Начать игру</button>
+        {{ Form::close() }}
+    @endif
 </div>
 @extends(env('THEME') . '.layouts.footer')
