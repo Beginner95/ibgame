@@ -371,7 +371,7 @@ function c(str) {
 }
 
 let infoModal = document.getElementsByTagName('aside')[0];
-let showModal = function (arr, i) {
+let showMessageModal = function (arr, i) {
 	if (i < arr.length) {
         arr[i].classList.add('modal-active');
         arr[i].classList.remove('hidden');
@@ -379,7 +379,7 @@ let showModal = function (arr, i) {
             if (e.target.tagName === 'BUTTON') {
                 sessionStorage.setItem(arr[i].id, 'true');
                 i++;
-                showModal(arr, i);
+                showMessageModal(arr, i);
             }
         });
     }
@@ -396,5 +396,5 @@ function information() {
 			}
 		}
 	}
-    showModal(newArray, 0);
+    showMessageModal(newArray, 0);
 }
