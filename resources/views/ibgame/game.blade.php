@@ -4,8 +4,8 @@
     <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
 </div>
 <div class="date_wrap">
-    <date class="date">03 / 11 / 19</date>
-    <date class="time">13:36</date>
+    <date class="date">{{ $time['dateTime']['date'] }}</date>
+    <date class="time">{{ $time['dateTime']['hour'] }}:{{ $time['dateTime']['minutes'] }}</date>
 </div>
 <div class="wrap">
     <div class="user_grid center">

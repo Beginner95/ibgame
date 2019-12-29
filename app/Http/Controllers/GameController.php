@@ -20,6 +20,11 @@ class GameController extends Controller
             'hour' => Carbon::parse($move->play_time)->format('H'),
             'minutes' => Carbon::parse($move->play_time)->format('i'),
             'seconds' => Carbon::parse($move->play_time)->format('s'),
+            'dateTime' => [
+                'date' => Carbon::parse($move->play_time_start)->format('d/m/y'),
+                'hour' => Carbon::parse($move->play_time_start)->format('H'),
+                'minutes' => Carbon::parse($move->play_time_start)->format('i')
+            ]
         ];
 
         if('0' === $team->status) {
