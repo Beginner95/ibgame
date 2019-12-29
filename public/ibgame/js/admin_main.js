@@ -16,7 +16,7 @@ function modalsControl(e){
             if (file !== '') {
                 let link_file = createElem('a');
                 addClass(link_file, 'link-file-resource');
-                link_file.href = '/file/evidence/' + file;
+                link_file.href = '/file/resource/' + file;
                 link_file.append('Скачать файл');
                 if (file_resource === null) {
                     qS('.link-file-resource').href = '/file/resource/' + file;
