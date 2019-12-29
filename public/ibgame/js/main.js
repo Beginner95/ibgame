@@ -245,6 +245,14 @@ function modalsControl(e){
 		modal.classList.add('modal-active');
 		overlay.classList.remove('hidden');
 	}
+
+	if (e.target.classList.contains('show-modal-resource') ||
+		e.target.classList.contains('show-modal-evidence') ||
+		e.target.classList.contains('show-modal-trigger')) {
+		let modal = e.target.nextSibling.nextElementSibling;
+        modal.classList.add('modal-active');
+        overlay.classList.remove('hidden');
+	}
 }
 
 document.addEventListener('click', modalsControl)
@@ -354,6 +362,36 @@ function qS(el) {
 	return document.querySelector(el);
 }
 
+function qSAll(el) {
+	return document.querySelectorAll(el);
+}
+
 function c(str) {
 	console.log(str);
+}
+
+let infoModal = document.getElementsByTagName('aside')[0];
+let showModal = function (arr, i) {
+	if (i < arr.length) {
+        arr[i].classList.add('modal-active');
+        arr[i].classList.remove('hidden');
+        infoModal.addEventListener('click', function (e) {
+            if (e.target.tagName === 'BUTTON') {
+                i++;
+                showModal(arr, i);
+            }
+        });
+    }
+};
+
+information();
+function information() {
+    let array = [qSAll('.resource-id'), qSAll('.evidence-id'), qSAll('.trigger-id')];
+    let newArray = [];
+    for (let i of array) {
+        for (let j of i) {
+        	newArray.push(j);
+		}
+	}
+    showModal(newArray, 0);
 }

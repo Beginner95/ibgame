@@ -121,7 +121,20 @@
                 <div class="item_content">
                     <ul class="resources_list">
                         @foreach ($team->resources as $resource)
-                            <li>{{$resource->resource}}</li>
+                            <li class="show-modal-resource">{{$resource->resource}}</li>
+                            <div class="modal new-info d-flex resource-id" data-name="resource" id="resource={{ $resource->id }}">
+                                <h4 class="modal_heading">Новая информация</h4>
+                                <div class="modal_content">
+                                    Вы нашли <br>
+                                    <div class="modal_content-main d-flex">
+                                        @if (!empty($resource->file))
+                                            <span><a href="/file/resource/{{ $resource->file }}" target="_blank">Файл</a></span>
+                                        @endif
+                                        <span>{{ $resource->resource }}</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-blue modal_close">Принять</button>
+                            </div>
                         @endforeach
                     </ul>
                 </div>
@@ -144,7 +157,20 @@
                 <div class="item_content">
                     <ul class="evidence_list">
                         @foreach($team->evidences as $evidence)
-                            <li>{{ $evidence->clue }}</li>
+                            <li class="show-modal-evidence">{{ $evidence->clue }}</li>
+                            <div class="modal new-info d-flex evidence-id" data-name="evidence" id="evidence={{ $evidence->id }}">
+                                <h4 class="modal_heading">Новая информация</h4>
+                                <div class="modal_content">
+                                    Вы нашли <br>
+                                    <div class="modal_content-main d-flex">
+                                        @if (!empty($evidence->file))
+                                            <span><a href="/file/evidence/{{ $evidence->file }}" target="_blank">Файл</a></span>
+                                        @endif
+                                        <span>{{ $evidence->clue }}</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-blue modal_close">Принять</button>
+                            </div>
                         @endforeach
                     </ul>
                 </div>
@@ -166,7 +192,21 @@
                 <div class="item_content">
                     <ul class="trigger_list">
                         @foreach($team->triggers as $trigger)
-                            <li>{{ $trigger->trigger }}</li>
+                            <li class="show-modal-trigger">{{ $trigger->trigger }}</li>
+                            <div class="modal alert d-flex trigger-id" data-name="trigger" id="trigger={{ $trigger->id }}">
+                                <h4 class="modal_heading">Внимание!</h4>
+                                <div class="modal_content">
+                                    <div class="modal_content-main d-flex">
+                                        <span>
+                                            {{ $trigger->trigger }}
+                                            @if (!empty($trigger->file))
+                                                <a href="/file/trigger/{{ $trigger->file }}" target="_blank">Скриншот</a>
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-blue modal_close">Принять</button>
+                            </div>
                         @endforeach
                     </ul>
                 </div>
@@ -184,67 +224,33 @@
     </div>
 </div>
 <div class="overlay"></div>
-<div class="modal new-info d-flex">
-    <h4 class="modal_heading">
-        Новая информация
-    </h4>
-    <div class="modal_content">
-        Вы нашли <br>
-        <div class="modal_content-main d-flex">
-				<span>
-					<img src="img/modal_img.png" alt="#">
-				</span>
-            <span>
-					КОПИЮ ПАСПОРТА
-				</span>
-        </div>
-    </div>
-    <button class="btn btn-blue modal_close">
-        Принять
-    </button>
-</div>
-<div class="modal alert d-flex">
-    <h4 class="modal_heading">
-        Внимание!
-    </h4>
-    <div class="modal_content">
-        <div class="modal_content-main d-flex">
-				<span>
-					Threat Intelligence отправил <a href="#">скриншот</a>
-				</span>
-        </div>
-    </div>
-    <button class="btn btn-blue modal_close">
-        Принять
-    </button>
-</div>
 <div class="time_alert hidden">
     У вас осталась 1 минута
 </div>
-<div class="modal modal-form d-flex">
-    <h4 class="modal_heading">
-        Добавление триггера
-    </h4>
-    <div class="modal_content modal_content-form">
-        <textarea class="item_content item_content-input"></textarea>
-        <label class="files_wrap d-flex">
-            <input type="file" multiple="" class='visually_hidden fileMulti'>
-            <span class="btn btn-blue">Приложить файлы</span>
-        </label>
-        <div class="output_wrap d-flex">
-            <span>Добавлено:</span>
-            <div class="output_files"></div>
-        </div>
-    </div>
-    <div class="btns_wrap d-flex">
-        <button class="btn btn-blue modal_close">
-            Сохранить
-        </button>
-        <button class="btn btn-blue modal_close">
-            Отправить
-        </button>
-    </div>
-</div>
+{{--<div class="modal modal-form d-flex">--}}
+    {{--<h4 class="modal_heading">--}}
+        {{--Добавление триггера--}}
+    {{--</h4>--}}
+    {{--<div class="modal_content modal_content-form">--}}
+        {{--<textarea class="item_content item_content-input"></textarea>--}}
+        {{--<label class="files_wrap d-flex">--}}
+            {{--<input type="file" multiple="" class='visually_hidden fileMulti'>--}}
+            {{--<span class="btn btn-blue">Приложить файлы</span>--}}
+        {{--</label>--}}
+        {{--<div class="output_wrap d-flex">--}}
+            {{--<span>Добавлено:</span>--}}
+            {{--<div class="output_files"></div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+    {{--<div class="btns_wrap d-flex">--}}
+        {{--<button class="btn btn-blue modal_close">--}}
+            {{--Сохранить--}}
+        {{--</button>--}}
+        {{--<button class="btn btn-blue modal_close">--}}
+            {{--Отправить--}}
+        {{--</button>--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 {{---Start modal site map---}}
 <div class="modal modal-site-map d-flex" style="max-width: 800px; max-height: 500px;">
