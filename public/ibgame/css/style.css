@@ -237,6 +237,14 @@
 	.date_wrap .date {
 		margin-right: 16px;
 	}
+
+	.date {
+		float: left;
+	}
+	.time {
+		float: right;
+	}
+
 	.wrap {
 		padding-top: 70px;
 		padding-bottom: 90px; 
