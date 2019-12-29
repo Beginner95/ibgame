@@ -9,6 +9,7 @@ use App\Move;
 use App\Resource;
 use App\Team;
 use App\Trigger;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,10 +32,26 @@ class IndexController extends Controller
             $team->description = null;
         }
 
+        $move = $this->getMove($team_id);
+        if (!empty($move)) {
+            $time = [
+                'hour' => Carbon::parse($move->play_time)->format('H'),
+                'minutes' => Carbon::parse($move->play_time)->format('i'),
+                'seconds' => Carbon::parse($move->play_time)->format('s'),
+            ];
+        } else {
+            $time = [
+                'hour' => '00',
+                'minutes' => '00',
+                'seconds' => '00',
+            ];
+        }
+
         return view(env('THEME') . '.admin.index', [
             'teams' => $teams,
             'team' => $team,
-            'move' => $this->getMove($team_id),
+            'move' => $move,
+            'time' => $time,
             'answer' => $this->getAnswer($team_id),
             'resources' => $this->getResources(),
             'evidences' => $this->getEvidences(),

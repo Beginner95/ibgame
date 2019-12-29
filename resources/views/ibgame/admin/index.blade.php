@@ -36,9 +36,9 @@
                 <button class="btn btn-gray btn-training">Дальше</button>
             </div>
             <div class="timer">
-                <span class="timer-hours">01</span>
-                :<span class="timer-mins">01</span>
-                :<span class="timer-secs">59</span>
+                <span class="timer-hours">{{$time['hour']}}</span>
+                :<span class="timer-mins">{{$time['minutes']}}</span>
+                :<span class="timer-secs">{{$time['seconds']}}</span>
                 <div class="training_modal">
                     <h4 class="training_heading">
                         Таймер

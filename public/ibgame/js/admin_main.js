@@ -221,6 +221,69 @@ function checkForm(form) {
     }
 }
 
+adminTimer();
+function adminTimer() {
+    var hours = parseInt(getEBCN('timer-hours')[0].innerText);
+    var mins = parseInt(getEBCN('timer-mins')[0].innerText);
+    var secs = parseInt(getEBCN('timer-secs')[0].innerText);
+    let i = 0;
+    var adminTimer = setInterval(function(){
+
+        if (hours === 0 && mins <= 1) {
+            getEBCN('timer')[0].classList.add('last_minute');
+            if (mins === 1 && secs >= 52) {
+                qS('.time_alert').classList.remove('hidden');
+            } else {
+                qS('.time_alert').classList.add('hidden');
+            }
+        }
+        if (hours === 0 && mins <= 0 && secs <= 15) {
+            getEBCN('timer')[0].classList.add('timesUp')
+        }
+        if ((hours <= 0 && mins <= 0 && secs <= 1)) {
+            getEBCN('timer-secs')[0].innerText = '00';
+            return
+        }
+        i++;
+        secs--;
+        if (secs <= 0) {
+            secs = 59;
+            mins--;
+            if(mins <= 0) {
+                if (hours > 0) {
+                    mins = 59;
+                } else {
+                    mins = 0;
+
+                }
+                hours--;
+                if (hours <= 0) {
+                    hours = 0;
+                }
+            }
+        }
+
+
+
+        if (hours <= 9) {
+            getEBCN('timer-hours')[0].innerText = '0' +  hours;
+        } else {
+            getEBCN('timer-hours')[0].innerText = hours;
+        }
+        if (mins <= 9) {
+            getEBCN('timer-mins')[0].innerText = '0' + mins;
+        } else {
+            getEBCN('timer-mins')[0].innerText = mins;
+        }
+
+        if (secs <= 9) {
+            getEBCN('timer-secs')[0].innerText = '0' + secs;
+        } else {
+            getEBCN('timer-secs')[0].innerText = secs;
+        }
+
+    },1000)
+}
 
 const admin_team = qS('.admin_item');
 
