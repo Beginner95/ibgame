@@ -377,6 +377,7 @@ let showModal = function (arr, i) {
         arr[i].classList.remove('hidden');
         infoModal.addEventListener('click', function (e) {
             if (e.target.tagName === 'BUTTON') {
+                sessionStorage.setItem(arr[i].id, 'true');
                 i++;
                 showModal(arr, i);
             }
@@ -390,7 +391,9 @@ function information() {
     let newArray = [];
     for (let i of array) {
         for (let j of i) {
-        	newArray.push(j);
+        	if (sessionStorage.getItem(j.id) === null) {
+                newArray.push(j);
+			}
 		}
 	}
     showModal(newArray, 0);
