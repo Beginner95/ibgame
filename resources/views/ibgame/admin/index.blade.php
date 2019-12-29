@@ -208,11 +208,13 @@
                 </div>
             </div>
         </aside>
-        {{ Form::open(['route' => 'admin.next.move', 'method' => 'post']) }}
-            <input type="hidden" name="move-id" value="{{ $move->id }}">
-            <input type="hidden" name="team-id" value="{{ $team->id }}">
-            <button class="btn btn-blue next-step">Следующий ход</button>
-        {{ Form::close() }}
+        @if (!empty($move))
+            {{ Form::open(['route' => 'admin.next.move', 'method' => 'post']) }}
+                <input type="hidden" name="move-id" value="{{ $move->id }}">
+                <input type="hidden" name="team-id" value="{{ $team->id }}">
+                <button class="btn btn-blue next-step">Следующий ход</button>
+            {{ Form::close() }}
+        @endif
     </div>
 </div>
 <div class="overlay hidden"></div>
