@@ -22,6 +22,7 @@ class IndexController extends Controller
 
         if (empty($team_id)) {
             $team = Team::first();
+            $team_id = $team->id;
         } else {
             $team = Team::where('id', $team_id)->first();
         }
@@ -49,6 +50,11 @@ class IndexController extends Controller
                 'hour' => '00',
                 'minutes' => '00',
                 'seconds' => '00',
+                'dateTime' => [
+                    'date' => '00/00/00',
+                    'hour' => '00',
+                    'minutes' => '00'
+                ]
             ];
         }
 
