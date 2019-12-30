@@ -91,7 +91,7 @@
                 <p>
                     Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
                 </p>
-                <button class="btn btn-blue btn-training">Ответить</button>
+                <button class="btn btn-gray btn-training">Ответить</button>
             </div>
         </section>
 
