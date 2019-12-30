@@ -13,6 +13,7 @@ class GameController extends Controller
     public function index(Request $request)
     {
         $team_id = $request['team'];
+        if (empty($team_id)) return back();
         $team = Team::where('id', $team_id)->first();
         $move = Move::where('team_id', $team_id)->where('status', 1)->first();
 
