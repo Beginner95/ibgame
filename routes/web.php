@@ -35,4 +35,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::post('/event-option', 'EventOptionController@store')->name('event.option');
     Route::get('/event-option/destroy/{id}', 'EventOptionController@destroy')->name('event.option.destroy');
+
+    Route::get('/game/reset-games/{id}', 'GameController@resetGames')->name('reset.games');
 });

@@ -3,6 +3,7 @@
     <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
 </div>
 <div class="panel-options">
+    <a href="{{ route('admin.reset.games', [2048]) }}" class="">Сборс игры</a>
     <a href="{{ route('logout') }}" class="">Выход</a>
 </div>
 <div class="date_wrap">

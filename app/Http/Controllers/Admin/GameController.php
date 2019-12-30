@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Answer;
+use App\EventOption;
+use App\Evidence;
 use App\Move;
+use App\Resource;
 use App\Team;
+use App\Trigger;
 use App\UploadFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -104,6 +109,41 @@ class GameController extends Controller
         $move_id = $request['move-id'];
         Move::where('id', $move_id)->where('team_id', $team_id)->update(['status' => 2]);
         Move::where('team_id', $team_id)->where('status', null)->first()->update(['status' => 1]);
+        return back();
+    }
+
+    public function resetGames($id)
+    {
+        if ($id !== '2048') return back();
+
+        $evenOptions = EventOption::get();
+        $resources = Resource::get();
+        $evidences = Evidence::get();
+        $triggers = Trigger::get();
+
+        $evenOptionController = new EventOptionController;
+        foreach ($evenOptions as $evenOption) {
+            $evenOptionController->destroy($evenOption->id);
+        }
+
+        $resourceController = new ResourceController;
+        foreach ($resources as $resource) {
+            $resourceController->destroy($resource->id);
+        }
+
+        $evidenceController = new EvidenceController;
+        foreach ($evidences as $evidence) {
+            $evidenceController->destroy($evidence->id);
+        }
+
+        $triggerController = new TriggerController;
+        foreach ($triggers as $trigger) {
+            $triggerController->destroy($trigger->id);
+        }
+
+        Answer::query()->delete();
+        Move::query()->delete();
+        Team::query()->delete();
         return back();
     }
 }
