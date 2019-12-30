@@ -22,7 +22,7 @@ class IndexController extends Controller
 
         if (empty($team_id)) {
             $team = Team::first();
-            $team_id = $team->id;
+            $team_id = !empty($team) ? $team->id : '';
         } else {
             $team = Team::where('id', $team_id)->first();
         }
