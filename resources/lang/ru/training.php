@@ -1,0 +1,21 @@
+<?php
+return [
+    'moves' => 'Ходы',
+    'moves_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'next' => 'Дальше',
+    'timer' => 'Таймер',
+    'timer_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'task_description' => 'Описание задачи',
+    'task_all_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'answer' => 'Ответ',
+    'answer_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'reply' => 'Ответить',
+    'network_map' => 'Карта сети',
+    'network_map_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'what_are_resources' => 'Что такое ресурсы?',
+    'what_are_resources_description' => '',
+    'what_are_evidences' => 'Что такое улики?',
+    'what_are_evidences_descriptions' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'what_are_triggers' => 'Что такое триггеры?',
+    'what_are_triggers_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+];

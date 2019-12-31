@@ -1,0 +1,21 @@
+<?php
+return [
+    'moves' => 'Moves',
+    'moves_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'next' => 'Next',
+    'timer' => 'Timer',
+    'timer_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'task_description' => 'Task description',
+    'task_all_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'answer' => 'Answer',
+    'answer_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'reply' => 'Reply',
+    'network_map' => 'Network map',
+    'network_map_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'what_are_resources' => 'What are resources?',
+    'what_are_resources_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'what_are_evidences' => 'What are evidences?',
+    'what_are_evidences_descriptions' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'what_are_triggers' => 'What are triggers?',
+    'what_are_triggers_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+];
