@@ -9,14 +9,12 @@
         </div>
         <div class="custom-select">
             <select name="lang" class="lang_select">
-                <option value="en">EN</option>
-                <option value="en">EN</option>
-                <option value="ru">RU</option>
-                <option value="FR">FR</option>
-                <option value="ES">ES</option>
+                <option value="ru" @if (\App\Http\Middleware\LocaleMiddleware::getLocale() === null) selected @endif>RU</option>
+                <option value="en" @if (\App\Http\Middleware\LocaleMiddleware::getLocale() === 'en') selected @endif>EN</option>
             </select>
         </div>
     </header>
+
     <h1 class="greeting">Добро пожаловать в игру!</h1>
     @if (!empty($teams->toArray()))
         {{ Form::open(['route' => 'game', 'method' => 'get', 'class' => 'teams_wrap']) }}
@@ -34,7 +32,7 @@
                     </li>
                 @endforeach
             </ul>
-            <button class="btn btn-blue">Начать игру</button>
+            <button class="btn btn-blue">{{ trans('interface.start_game') }}</button>
         {{ Form::close() }}
     @endif
 </div>

@@ -398,3 +398,23 @@ function information() {
 	}
     showMessageModal(newArray, 0);
 }
+
+let selectLang = qS('.select-selected');
+let langs = qS('select[name="lang"]');
+let langsItem = qS('.select-items');
+
+if (langs.value === 'en') {
+	langsItem.innerHTML = '<div>RU</div>';
+}
+selectLang.addEventListener('click', setLang);
+langsItem.addEventListener('click', setLang);
+
+function setLang(e) {
+   if (e.target.classList.contains('select-arrow-active') === false) {
+		if (e.target.innerText === 'RU') {
+			window.location = '/';
+        } else {
+            window.location = e.target.innerText.toLowerCase();
+		}
+   }
+}

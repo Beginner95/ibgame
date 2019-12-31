@@ -1,15 +1,42 @@
 <?php
 
-Route::resource('/', 'IndexController', [
-    'only' => ['index'],
-    'names' => [
-        'index' => 'home'
-    ]
-]);
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 
-Route::get('/game', 'GameController@index')->name('game');
-Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
-Route::post('/game/answer', 'GameController@answer')->name('answer');
+
+Route::group(['prefix' => \App\Http\Middleware\LocaleMiddleware::getLocale()], function () {
+    Route::resource('/', 'IndexController', [
+        'only' => ['index'],
+        'names' => [
+            'index' => 'home'
+        ]
+    ]);
+
+    Route::get('/game', 'GameController@index')->name('game');
+    Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
+    Route::post('/game/answer', 'GameController@answer')->name('answer');
+});
+
+Route::get('setlocale/{lang}', function ($lang) {
+    $referer = Redirect::back()->getTargetUrl();
+    $parse_url = parse_url($referer, PHP_URL_PATH);
+    $segments = explode('/', $parse_url);
+
+    if (in_array($segments[1], App\Http\Middleware\LocaleMiddleware::$languages)) {
+        unset($segments[1]);
+    }
+
+    if ($lang != App\Http\Middleware\LocaleMiddleware::$mainLanguage){
+        array_splice($segments, 1, 0, $lang);
+    }
+
+    $url = Request::root().implode("/", $segments);
+
+    if(parse_url($referer, PHP_URL_QUERY)){
+        $url = $url.'?'. parse_url($referer, PHP_URL_QUERY);
+    }
+    return redirect($url);
+})->name('setlocale');
 
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
