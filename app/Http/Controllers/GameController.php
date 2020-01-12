@@ -17,6 +17,10 @@ class GameController extends Controller
         $team = Team::where('id', $team_id)->first();
         $move = Move::where('team_id', $team_id)->where('status', 1)->first();
 
+        if (empty($move)) {
+            $move = Move::where('team_id', $team_id)->where('status', 2)->latest('move')->first();
+        }
+
         $time = [
             'hour' => Carbon::parse($move->play_time)->format('H'),
             'minutes' => Carbon::parse($move->play_time)->format('i'),

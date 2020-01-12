@@ -74,7 +74,12 @@ class IndexController extends Controller
     public function getAnswer($team_id)
     {
         $move = Move::where('status', 1)->where('team_id', $team_id)->first();
+        if (empty($move)) {
+            $move = Move::where('team_id', $team_id)->where('status', 2)->latest('move')->first();
+        }
+
         if (empty($move)) return null;
+
         return Answer::where('move_id', $move->id)->orderBy('id', 'DESC')->first();
     }
 

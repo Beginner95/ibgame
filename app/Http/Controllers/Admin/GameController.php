@@ -108,7 +108,11 @@ class GameController extends Controller
         $team_id = $request['team-id'];
         $move_id = $request['move-id'];
         Move::where('id', $move_id)->where('team_id', $team_id)->update(['status' => 2]);
-        Move::where('team_id', $team_id)->where('status', null)->first()->update(['status' => 1]);
+        $move = Move::where('team_id', $team_id)->where('status', null)->first();
+        if (!empty($move)) {
+            $move->update(['status' => 1]);
+        }
+
         return back();
     }
 
