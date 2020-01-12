@@ -110,7 +110,7 @@ class TriggerController extends Controller
         $team = Team::where('id', $team_id)->first();
         $triggerId = $this->saveTrigger($name);
         $team->triggers()->attach($triggerId);
-        $team->description = $team->description . '<br>' . $name;
+        $team->description = $team->description . '<p class="color-add-text">' . $name . '</p>';
         $team->save();
     }
 

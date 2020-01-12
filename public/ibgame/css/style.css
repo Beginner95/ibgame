@@ -922,3 +922,12 @@
 .panel-options a:hover {
 	text-decoration: none;
 }
+
+.color-add-text {
+	-moz-text-shadow:0 0 10px #1875ff;
+	-webkit-text-shadow:0 0 10px #1875ff;
+	text-shadow:0 0 10px #1875ff;
+	padding-top: 5px;
+	color: #1875ff;
+	margin: 0 !important;
+}

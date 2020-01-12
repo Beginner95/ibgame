@@ -112,7 +112,7 @@ class EventOptionController extends Controller
         $team = Team::where('id', $team_id)->first();
         $eventOptionId = $this->saveEventOption($name, $description);
         $team->eventOptions()->attach($eventOptionId);
-        $team->description = $team->description . '<br>' . $description;
+        $team->description = $team->description . '<p class="color-add-text">' . $description . '</p>';
         $team->save();
     }
 
