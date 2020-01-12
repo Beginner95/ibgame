@@ -146,38 +146,22 @@
                     <button class="btn btn-gray btn-training">{{ trans('training.next') }}</button>
                 </div>
             </div>
-
-            <div class="item_wrap" data-order='7'>
-                <div class="item_header d-flex">
-                    <h2 class="item_name">{{ trans('interface.triggers') }}</h2>
+            @foreach($team->triggers as $trigger)
+                <div class="modal alert d-flex trigger-id" data-name="trigger" id="trigger={{ $trigger->id }}">
+                    <h4 class="modal_heading">{{ trans('interface.attention') }}</h4>
+                    <div class="modal_content">
+                        <div class="modal_content-main d-flex">
+                            <span>
+                                {{ $trigger->trigger }}
+                                @if (!empty($trigger->file))
+                                    <a href="/file/trigger/{{ $trigger->file }}" target="_blank">{{ trans('interface.screenshot') }}</a>
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn btn-blue modal_close">{{ trans('interface.accept') }}</button>
                 </div>
-                <div class="item_content">
-                    <ul class="trigger_list">
-                        @foreach($team->triggers as $trigger)
-                            <li class="show-modal-trigger">{{ $trigger->trigger }}</li>
-                            <div class="modal alert d-flex trigger-id" data-name="trigger" id="trigger={{ $trigger->id }}">
-                                <h4 class="modal_heading">{{ trans('interface.attention') }}</h4>
-                                <div class="modal_content">
-                                    <div class="modal_content-main d-flex">
-                                        <span>
-                                            {{ $trigger->trigger }}
-                                            @if (!empty($trigger->file))
-                                                <a href="/file/trigger/{{ $trigger->file }}" target="_blank">{{ trans('interface.screenshot') }}</a>
-                                            @endif
-                                        </span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-blue modal_close">{{ trans('interface.accept') }}</button>
-                            </div>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="training_modal">
-                    <h4 class="training_heading">{{ trans('training.what_are_triggers') }}</h4>
-                    <p>{{ trans('training.what_are_description') }}</p>
-                    <button class="btn btn-gray btn-training">{{ trans('training.next') }}</button>
-                </div>
-            </div>
+            @endforeach
         </aside>
     </div>
 </div>
