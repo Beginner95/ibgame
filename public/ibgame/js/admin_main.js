@@ -221,7 +221,9 @@ function checkForm(form) {
     }
 }
 
-adminTimer();
+let start_time = qS('.start-time');
+if (start_time !== null) adminTimer();
+
 function adminTimer() {
     var hours = parseInt(getEBCN('timer-hours')[0].innerText);
     var mins = parseInt(getEBCN('timer-mins')[0].innerText);

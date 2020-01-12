@@ -39,7 +39,7 @@
                 </p>
                 <button class="btn btn-gray btn-training">Дальше</button>
             </div>
-            <div class="timer">
+            <div class="timer @if($team->status === '1') start-time @endif">
                 <span class="timer-hours">{{$time['hour']}}</span>
                 :<span class="timer-mins">{{$time['minutes']}}</span>
                 :<span class="timer-secs">{{$time['seconds']}}</span>
