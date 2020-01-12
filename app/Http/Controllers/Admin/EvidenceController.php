@@ -110,7 +110,6 @@ class EvidenceController extends Controller
         $team = Team::where('id', $team_id)->first();
         $evidenceId = $this->saveEvidence($name);
         $team->evidences()->attach($evidenceId);
-        $team->description = $team->description . '<br>' . $name;
         $team->save();
     }
 
