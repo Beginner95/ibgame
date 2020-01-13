@@ -94,8 +94,7 @@ class GameController extends Controller
     {
         if (Input::file('site-map')) {
             $input = Input::file('site-map');
-            $extension = $input->getClientOriginalExtension();
-            $fileName = 'map.' . $extension;
+            $fileName = 'map.jpg';
             $destinationPath = public_path('file/site-map/');
             $input->move($destinationPath, $fileName);
             return back();
