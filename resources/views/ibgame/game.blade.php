@@ -32,7 +32,7 @@
                 <span class="timer-hours">{{$time['hour']}}</span>
                 :<span class="timer-mins">{{$time['minutes']}}</span>
                 :<span class="timer-secs">{{$time['seconds']}}</span>
-                <div class="training_modal">
+                <div class="training_modal" style="line-height: 1.15; font-weight: 400; text-align: left; letter-spacing: 0;">
                     <h4 class="training_heading">{{ trans('training.timer') }}</h4>
                     <p>{{ trans('training.timer_description') }}</p>
                     <button class="btn btn-gray btn-training">{{ trans('training.next') }}</button>
@@ -84,7 +84,7 @@
                         <div class="training_modal">
                             <h4 class="training_heading">{{ trans('training.network_map') }}</h4>
                             <p>{{ trans('training.network_map_description') }}</p>
-                            <img src="img/info_img.jpg" alt="#">
+                            <img src="/file/site-map/map.jpg" alt="#">
                             <button class="btn btn-gray btn-training">{{ trans('training.next') }}</button>
                         </div>
                     </div>
