@@ -240,12 +240,6 @@ function modalsControl(e){
 		modal.classList.remove('hidden')
 	}
 
-	if (e.target.classList.contains('show-site-map')) {
-		let modal = getEBCN('modal-site-map')[0];
-		modal.classList.add('modal-active');
-		overlay.classList.remove('hidden');
-	}
-
 	if (e.target.classList.contains('show-modal-resource') ||
 		e.target.classList.contains('show-modal-evidence') ||
 		e.target.classList.contains('show-modal-trigger')) {

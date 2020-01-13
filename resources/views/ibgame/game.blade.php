@@ -80,7 +80,7 @@
                 <div class="item_header d-flex">
                     <h2 class="item_name">{{ trans('interface.resources') }}</h2>
                     <div class="item_wrap item_wrap-map"  data-order='2'>
-                        <button class="btn btn-line show-site-map">{{ trans('interface.open_network_map') }}</button>
+                        <a href="/file/site-map/map.jpg" target="_blank"><button class="btn btn-line">{{ trans('interface.open_network_map') }}</button></a>
                         <div class="training_modal">
                             <h4 class="training_heading">{{ trans('training.network_map') }}</h4>
                             <p>{{ trans('training.network_map_description') }}</p>
@@ -167,15 +167,4 @@
 </div>
 <div class="overlay"></div>
 <div class="time_alert hidden">{{ trans('interface.one_minute') }}</div>
-
-{{---Start modal site map---}}
-<div class="modal modal-site-map d-flex" style="max-width: 800px; max-height: 500px;">
-    <div class="modal_content modal_content-form" style="max-width: 725px;">
-        <div class="add_team_content">
-            <img src="/file/site-map/map.jpg" alt="">
-        </div>
-    </div>
-</div>
-{{--End modal site map--}}
-
 @extends(env('THEME') . '.layouts.footer')
