@@ -168,8 +168,7 @@ function timer() {
 
 var overlay = getEBCN('overlay')[0];
 
-var trainingPassed = false;
-
+var team_id = getId('team_id').value;
 function training() {
 	var trainingsElement = [];
 	var step = 1
@@ -181,8 +180,8 @@ function training() {
  	// Ищем нужный элемент для обучения
  	function activateElement(e) {
  		if (e.target.classList.contains('btn-training')) {
- 			if (trainingsElement.length == step) {
- 				localStorage.setItem('trainingPassed', 'true');
+ 			if (trainingsElement.length === step) {
+ 				localStorage.setItem('trainingPassed=' + team_id, 'true');
  				overlay.classList.add('hidden');
  				document.getElementsByClassName('item_wrap-active')[0].classList.remove('item_wrap-active')
  				timer()
@@ -204,11 +203,9 @@ function training() {
 }
 
 if (getEBCN('item_wrap')[0]) {
-	if (localStorage.getItem('trainingPassed') == false || localStorage.getItem('trainingPassed') == null) {
+	if (localStorage.getItem('trainingPassed=' + team_id) === false || localStorage.getItem('trainingPassed=' + team_id) === null) {
 	 	training()
-	 	console.log('начать обучение')
 	} else {
-		console.log('обучение уже пройдено')
 		overlay.classList.add('hidden');
         getEBCN('item_wrap-active')[0].classList.remove('item_wrap-active')
 		timer()	
