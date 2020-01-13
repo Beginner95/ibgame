@@ -34,35 +34,12 @@ class IndexController extends Controller
         }
 
         $move = $this->getMove($team_id);
-        if (!empty($move)) {
-            $time = [
-                'hour' => Carbon::parse($move->play_time)->format('H'),
-                'minutes' => Carbon::parse($move->play_time)->format('i'),
-                'seconds' => Carbon::parse($move->play_time)->format('s'),
-                'dateTime' => [
-                    'date' => Carbon::parse($move->play_time_start)->format('d/m/y'),
-                    'hour' => Carbon::parse($move->play_time_start)->format('H'),
-                    'minutes' => Carbon::parse($move->play_time_start)->format('i')
-                ]
-            ];
-        } else {
-            $time = [
-                'hour' => '00',
-                'minutes' => '00',
-                'seconds' => '00',
-                'dateTime' => [
-                    'date' => '00/00/00',
-                    'hour' => '00',
-                    'minutes' => '00'
-                ]
-            ];
-        }
 
         return view(env('THEME') . '.admin.index', [
             'teams' => $teams,
             'team' => $team,
             'move' => $move,
-            'time' => $time,
+            'time' => $this->getTime($move),
             'answer' => $this->getAnswer($team_id),
             'resources' => $this->getResources(),
             'evidences' => $this->getEvidences(),
@@ -106,5 +83,33 @@ class IndexController extends Controller
     public function getEventOptions()
     {
         return EventOption::get();
+    }
+
+    private function getTime($move)
+    {
+        if (!empty($move)) {
+            $time = [
+                'hour' => Carbon::parse($move->play_time)->format('H'),
+                'minutes' => Carbon::parse($move->play_time)->format('i'),
+                'seconds' => Carbon::parse($move->play_time)->format('s'),
+                'dateTime' => [
+                    'date' => Carbon::parse($move->play_time_start)->format('d/m/y'),
+                    'hour' => Carbon::parse($move->play_time_start)->format('H'),
+                    'minutes' => Carbon::parse($move->play_time_start)->format('i')
+                ]
+            ];
+        } else {
+            $time = [
+                'hour' => '00',
+                'minutes' => '00',
+                'seconds' => '00',
+                'dateTime' => [
+                    'date' => '00/00/00',
+                    'hour' => '00',
+                    'minutes' => '00'
+                ]
+            ];
+        }
+        return $time;
     }
 }
