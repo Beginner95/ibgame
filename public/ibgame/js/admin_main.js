@@ -35,12 +35,6 @@ function modalsControl(e){
                 }
             }
 
-            if (e.target.dataset.existResource === '1') {
-                addStyle(qS('.send_resource'), 'display:none');
-            } else {
-                addStyle(qS('.send_resource'), 'display:block');
-            }
-
             let btn = qS('.save_resource');
             let remove_link = createElem('a');
             addClass(remove_link, 'btn btn-blue save_resource');
@@ -161,16 +155,14 @@ function modalsControl(e){
         showModal(form);
     }
 
-    if (e.target.classList.contains('save_resource') ||
-        e.target.classList.contains('save_evidence') ||
+    if (e.target.classList.contains('save_evidence') ||
         e.target.classList.contains('save_trigger') ||
         e.target.classList.contains('save_event_option')
         ) {
 
         e.target.parentNode.childNodes[6].value = 'save';
     }
-    if (e.target.classList.contains('send_resource') ||
-        e.target.classList.contains('send_evidence') ||
+    if (e.target.classList.contains('send_evidence') ||
         e.target.classList.contains('send_trigger') ||
         e.target.classList.contains('send_event_option')
         ) {

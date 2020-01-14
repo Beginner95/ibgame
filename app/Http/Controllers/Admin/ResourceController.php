@@ -39,15 +39,9 @@ class ResourceController extends Controller
     public function store(Request $request)
     {
         $resource_name = $request['resource-name'];
-        $save_send = $request['save-send'];
-        $team_id = $request['team-id'];
         if (empty($resource_name)) return back();
-        if ($save_send == 'send') {
-            $this->sendResource($resource_name, $team_id);
-        } else {
-            $this->saveResource($resource_name);
-        }
-        return redirect('/admin?team=' . $team_id);
+        $this->saveResource($resource_name);
+        return redirect('/admin');
     }
 
     /**
@@ -98,18 +92,8 @@ class ResourceController extends Controller
             $upFile = new UploadFile();
             $upFile->deleteCurrentFile($file, 'resource');
         }
-        $trigger->teams()->detach();
         $trigger->delete();
         return back();
-    }
-
-    private function sendResource($name, $team_id)
-    {
-        $team = Team::where('id', $team_id)->first();
-        $resourceId = $this->saveResource($name);
-        $team->resources()->attach($resourceId);
-        $team->description = $team->description . '<br>' . $name;
-        $team->save();
     }
 
     private function saveResource($name)

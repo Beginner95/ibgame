@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Move;
+use App\Resource;
 use App\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -43,7 +44,8 @@ class GameController extends Controller
         return view(env('THEME') . '.game', [
             'team' => $team,
             'time' => $time,
-            'move' => $move
+            'move' => $move,
+            'resources' => Resource::get()
         ]);
     }
 

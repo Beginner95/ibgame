@@ -133,13 +133,7 @@
                 <div class="item_content">
                     <ul class="resources_list">
                         @foreach ($resources as $resource)
-                            @php $status = 'data-exist-resource=0'; @endphp
-                            @foreach($team->resources as $t)
-                                @if ($t->id === $resource->id)
-                                    @php $status = 'data-exist-resource=1'; @endphp
-                                @endif
-                            @endforeach
-                            <li data-resource-id="{{ $resource->id }}" data-resource-file="{{ $resource->file }}" {{$status}}>{{$resource->resource}}</li>
+                            <li data-resource-id="{{ $resource->id }}" data-resource-file="{{ $resource->file }}">{{$resource->resource}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -300,8 +294,6 @@
     <input type="hidden" name="resource-id" value="">
     <div class="btns_wrap d-flex">
         <button class="btn btn-blue save_resource">Сохранить</button>
-        <button class="btn btn-blue send_resource">Отправить</button>
-        <input type="hidden" name="team-id" value="{{$team->id}}"><input type="hidden" name="save-send" value="save">
     </div>
     {{ Form::close() }}
 </div>

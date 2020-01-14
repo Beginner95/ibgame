@@ -10,11 +10,6 @@ class Team extends Model
         'team', 'description', 'icon', 'status'
     ];
 
-    public function resources()
-    {
-        return $this->belongsToMany(Resource::class, 'team_to_resource')->orderBy('id', 'DESC')->withTimestamps();
-    }
-
     public function triggers()
     {
         return $this->belongsToMany(Trigger::class, 'team_to_trigger')->orderBy('id', 'DESC')->withTimestamps();

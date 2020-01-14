@@ -92,7 +92,7 @@
                 </div>
                 <div class="item_content">
                     <ul class="resources_list">
-                        @foreach ($team->resources as $resource)
+                        @foreach ($resources as $resource)
                             <li class="show-modal-resource">{{$resource->resource}}</li>
                             <div class="modal new-info d-flex resource-id" data-name="resource" id="resource={{ $resource->id }}">
                                 <h4 class="modal_heading">{{ trans('interface.new_information') }}</h4>
