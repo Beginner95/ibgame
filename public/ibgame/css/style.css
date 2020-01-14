@@ -101,7 +101,7 @@
 	}
 	.greeting {
 		padding: 35px 35px;
-		background: url(../img/heading-border.svg) left top no-repeat/ 100% 100%;
+		background: url(../img/heading-border.svg) no-repeat left top / 100% 100%;
 		font-size: 44px;
 		margin: 0;
 		margin-bottom: 78px;
@@ -588,7 +588,7 @@
 	.modal_heading {
 		font-weight: 700;
 		font-size: 24px;
-		background: url(../img/heading-border.svg) left top no-repeat/ 100% 100%;
+		background: url(../img/heading-border.svg) no-repeat left top / 100% 100%;
 		padding: 30px;
 	}
 	.modal_content-main {
@@ -930,4 +930,12 @@
 	padding-top: 5px;
 	color: #1875ff;
 	margin: 0 !important;
+}
+
+.evidence_list li:before {
+	top: 28%;
+}
+
+.user_item .btn {
+	width: 20%;
 }
