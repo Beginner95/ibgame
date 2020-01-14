@@ -88,7 +88,7 @@ function timer() {
 	var mins = parseInt(getEBCN('timer-mins')[0].innerText);
 	var secs = parseInt(getEBCN('timer-secs')[0].innerText);
 	let i = 0;
-	let move = getId('move').value;
+	let move = getId('move').dataset.move;
 	var timer = setInterval(function(){
 
 		if (hours === 0 && mins <= 1) {

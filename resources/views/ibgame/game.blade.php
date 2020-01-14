@@ -61,7 +61,7 @@
             @if (empty($move->answer->answer))
                 {{ Form::open(['url' => '/game/answer', 'method' => 'post']) }}
                     <input type="hidden" id="team_id" name="team-id" value="{{$team->id}}">
-                    <input type="hidden" id="move" name="move-id" value="{{$move->id}}">
+                    <input type="hidden" id="move" name="move-id" data-move="{{ $move->move }}" value="{{$move->id}}">
                     <textarea name="answer" class="item_content item_content-input" required></textarea>
                     <button class="btn btn-blue">{{ trans('interface.reply') }}</button>
                 {{ Form::close() }}
