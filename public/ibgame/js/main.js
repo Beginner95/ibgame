@@ -168,7 +168,8 @@ function timer() {
 
 var overlay = getEBCN('overlay')[0];
 
-var team_id = getId('team_id').value;
+var team_id = getId('team_id');
+if (team_id !== null) team_id = team_id.value;
 function training() {
 	var trainingsElement = [];
 	var step = 1
@@ -378,7 +379,7 @@ let showMessageModal = function (arr, i) {
 
 information();
 function information() {
-    let array = [qSAll('.resource-id'), qSAll('.evidence-id'), qSAll('.trigger-id')];
+    let array = [qSAll('.evidence-id'), qSAll('.trigger-id')];
     let newArray = [];
     for (let i of array) {
         for (let j of i) {
@@ -393,19 +394,21 @@ function information() {
 let selectLang = qS('.select-selected');
 let langs = qS('select[name="lang"]');
 let langsItem = qS('.select-items');
+if (langs !== null) {
+    if (langs.value === 'en') {
+        langsItem.innerHTML = '<div>RU</div>';
+    }
+    selectLang.addEventListener('click', setLang);
+    langsItem.addEventListener('click', setLang);
 
-if (langs.value === 'en') {
-	langsItem.innerHTML = '<div>RU</div>';
+    function setLang(e) {
+        if (e.target.classList.contains('select-arrow-active') === false) {
+            if (e.target.innerText === 'RU') {
+                window.location = '/';
+            } else {
+                window.location = e.target.innerText.toLowerCase();
+            }
+        }
+    }
 }
-selectLang.addEventListener('click', setLang);
-langsItem.addEventListener('click', setLang);
 
-function setLang(e) {
-   if (e.target.classList.contains('select-arrow-active') === false) {
-		if (e.target.innerText === 'RU') {
-			window.location = '/';
-        } else {
-            window.location = e.target.innerText.toLowerCase();
-		}
-   }
-}
