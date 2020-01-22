@@ -88,7 +88,8 @@ function timer() {
 	var mins = parseInt(getEBCN('timer-mins')[0].innerText);
 	var secs = parseInt(getEBCN('timer-secs')[0].innerText);
 	let i = 0;
-	let move = getId('move').dataset.move;
+	let move = getId('move');
+	if (move !== null) move = move.dataset.move;
 	var timer = setInterval(function(){
 
 		if (hours === 0 && mins <= 1) {
@@ -367,6 +368,7 @@ let showMessageModal = function (arr, i) {
 	if (i < arr.length) {
         arr[i].classList.add('modal-active');
         arr[i].classList.remove('hidden');
+        overlay.classList.remove('hidden');
         infoModal.addEventListener('click', function (e) {
             if (e.target.tagName === 'BUTTON') {
                 sessionStorage.setItem(arr[i].id, 'true');
