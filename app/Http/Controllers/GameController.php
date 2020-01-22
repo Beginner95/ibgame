@@ -104,6 +104,22 @@ class GameController extends Controller
         $a->move_id = $move_id;
         $a->save();
 
+        $move = Move::where('team_id', $team_id)->orderBy('id', 'desc')->first();
+        if ($move->status === '1') {
+            $move->update(['status' => 2]);
+            return redirect('/game/result/' . $team_id);
+        }
+
         return redirect('/game?team=' . $team_id);
+    }
+
+    public function result($team_id)
+    {
+        $team = Team::where('id', $team_id)->first();
+        $percent = 0;
+        foreach ($team->evidences as $evidence) {
+            $percent += $evidence->percent;
+        }
+        return view(env('THEME') . '.result', ['percent' => $percent]);
     }
 }

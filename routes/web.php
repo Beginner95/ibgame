@@ -15,6 +15,7 @@ Route::group(['prefix' => \App\Http\Middleware\LocaleMiddleware::getLocale()], f
     Route::get('/game', 'GameController@index')->name('game');
     Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
     Route::post('/game/answer', 'GameController@answer')->name('answer');
+    Route::get('/game/result/{team}', 'GameController@result')->name('result');
 });
 
 Route::get('setlocale/{lang}', function ($lang) {
