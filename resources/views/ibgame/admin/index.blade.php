@@ -161,7 +161,7 @@
                                     @php $status = 'data-exist-evidence=1'; @endphp
                                 @endif
                             @endforeach
-                            <li data-evidence-id="{{ $evidence->id }}" data-evidence-file="{{ $evidence->file }}" {{$status}}>{{$evidence->clue}}</li>
+                            <li data-evidence-id="{{ $evidence->id }}" data-evidence-file="{{ $evidence->file }}" data-evidence-percent="{{ $evidence->percent }}" {{$status}}>{{$evidence->clue}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -305,6 +305,7 @@
     <div class="modal_content modal_content-form">
         <div class="add_team_content">
             <textarea name="evidence-name" class="item_content item_content-input"></textarea>
+            <input type="text" name="percent" class="item_content_team item_content-input" style="margin: 2px 0;" placeholder="Процент улики">
             <label class="files_wrap d-flex" data-id="evidence">
                 <input type="file" name="evidence" class='visually_hidden evidence'>
                 <span class="btn btn-blue file-evidence">Приложить файлы</span>

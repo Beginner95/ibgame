@@ -50,6 +50,7 @@ function modalsControl(e){
         showModal(form);
         if (e.target.parentNode.classList.contains('evidence_list')) {
             qS('textarea[name="evidence-name"]').value = e.target.innerText;
+            qS('input[name="percent"]').value = e.target.dataset.evidencePercent;
             qS('input[name="evidence-id"]').value = e.target.dataset.evidenceId;
 
             let file = e.target.dataset.evidenceFile;

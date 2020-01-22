@@ -39,15 +39,16 @@ class EvidenceController extends Controller
     public function store(Request $request)
     {
         $name = $request['evidence-name'];
+        $percent = $request['percent'];
         $save_send = $request['save-send'];
         $team_id = $request['team-id'];
 
-        if (empty($name)) return back();
+        if (empty($name) || empty($percent)) return back();
 
         if ($save_send == 'send') {
-            $this->sendEvidence($name, $team_id);
+            $this->sendEvidence($name, $percent, $team_id);
         } else {
-            $this->saveEvidence($name);
+            $this->saveEvidence($name, $percent);
         }
         return redirect('/admin?team=' . $team_id);
     }
@@ -105,15 +106,15 @@ class EvidenceController extends Controller
         return back();
     }
 
-    private function sendEvidence($name, $team_id)
+    private function sendEvidence($name, $percent, $team_id)
     {
         $team = Team::where('id', $team_id)->first();
-        $evidenceId = $this->saveEvidence($name);
+        $evidenceId = $this->saveEvidence($name, $percent);
         $team->evidences()->attach($evidenceId);
         $team->save();
     }
 
-    private function saveEvidence($name)
+    private function saveEvidence($name, $percent)
     {
         $evidence = Evidence::where('clue', $name)->first();
         if (!empty($evidence)) return $evidence->id;
@@ -122,6 +123,7 @@ class EvidenceController extends Controller
         $evidence = new Evidence();
         $evidence->clue = $name;
         $evidence->file = $upFile->uploadFile('evidence');
+        $evidence->percent = $percent;
         $evidence->save();
         return $evidence->id;
     }
