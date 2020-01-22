@@ -939,3 +939,9 @@
 .user_item .btn {
 	width: 20%;
 }
+
+.evidence_list li {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	height: 15px;
+}
