@@ -945,3 +945,7 @@
 	overflow: hidden;
 	height: 15px;
 }
+
+.team_list li:last-of-type {
+	margin: 0 auto;
+}
