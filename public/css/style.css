@@ -949,3 +949,28 @@
 .team_list li:last-of-type {
 	margin: 0 auto;
 }
+
+.auth {
+	padding: 25px;
+	color: black;
+	width: 300px;
+	margin: 250px auto;
+	border: 1px solid #dddddd;
+	text-align: center;
+}
+
+.auth label {
+	margin: 5px;
+}
+
+.auth input {
+	padding: 5px;
+	border-radius: 5px;
+	overflow: visible;
+	border: 1px solid #dddddd;
+	margin: 10px 0;
+}
+
+.auth button {
+	cursor: pointer;
+}
