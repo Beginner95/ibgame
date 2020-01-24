@@ -9,20 +9,21 @@
 
     <title>{{ config('app.name', 'Group|IB') }}</title>
 
-    <!-- Scripts -->
-
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous" defer></script>
     <script src="{{ asset('js/jquery.vide.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="{{ asset('js/admin_main.js') }} " defer></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic" rel="stylesheet">
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/media.css') }}">
 </head>
 <body>
+
       @yield('content')
 </body>
 </html>

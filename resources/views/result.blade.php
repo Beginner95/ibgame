@@ -1,11 +1,12 @@
-@extends(env('THEME') . '.layouts.head')
+@extends('layouts.app')
+@section('content')
 <div class="loader">
-    <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
+    <img src="{{asset('img/loader_icon.png')}}" alt="#">
 </div>
 <div class="choose_team d-flex"  style="background: #030919;">
     <header class="header d-flex">
         <div class="logo">
-            <img src="{{ asset(env('THEME')) }}/img/logo.svg" alt="">
+            <img src="{{ asset('img/logo.svg') }}" alt="">
         </div>
         <div class="custom-select">
             <select name="lang" class="lang_select">
@@ -39,12 +40,6 @@
     @endif
 </div>
 
-<!-- scripts -->
-<script
-        src="https://code.jquery.com/jquery-3.4.0.min.js"
-        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
-        crossorigin="anonymous">
-</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>
@@ -53,4 +48,4 @@
     }, 3000);
 
 </script>
-@extends(env('THEME') . '.layouts.footer')
+@endsection

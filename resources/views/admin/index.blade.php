@@ -1,4 +1,6 @@
-@extends(env('THEME') . '.layouts.head')
+@extends('admin.layouts.app')
+
+@section('content')
 <div class="loader">
     <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
 </div>
@@ -436,4 +438,4 @@
 <div class="time_alert hidden">
     У вас осталась 1 минута
 </div>
-@extends(env('THEME') . '.layouts.footer')
+@endsection

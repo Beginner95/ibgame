@@ -1,11 +1,13 @@
-@extends(env('THEME') . '.layouts.head')
+@extends('layouts.app')
+
+@section('content')
 <div class="loader">
-    <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
+    <img src="{{asset('img/loader_icon.png')}}" alt="#">
 </div>
-<div class="choose_team d-flex" data-vide-bg="{{ asset(env('THEME')) }}/video/video">
+<div class="choose_team d-flex" data-vide-bg="{{ asset('video/video') }}">
     <header class="header d-flex">
         <div class="logo">
-            <img src="{{ asset(env('THEME')) }}/img/logo.svg" alt="">
+            <img src="{{ asset('img/logo.svg') }}" alt="">
         </div>
         <div class="custom-select">
             <select name="lang" class="lang_select">
@@ -25,7 +27,7 @@
                         <label>
                             <input type="radio" name="team" value="{{$team->id}}" class="visually_hidden" @if ('1' === $team->status) disabled @endif>
                             <span class="team_logo">
-                                <img src="{{ asset(env('THEME')) }}/img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif" alt="">
+                                <img src="{{ asset('/') }}img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif" alt="">
                             </span>
                             <span class="team_name">{{$team->team}}</span>
                         </label>
@@ -36,4 +38,4 @@
         {{ Form::close() }}
     @endif
 </div>
-@extends(env('THEME') . '.layouts.footer')
+@endsection

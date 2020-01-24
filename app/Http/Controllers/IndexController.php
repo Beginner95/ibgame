@@ -15,7 +15,7 @@ class IndexController extends Controller
     public function index()
     {
         $teams = Team::get();
-        return view(env('THEME') . '.index', ['teams' => $teams]);
+        return view('index', ['teams' => $teams]);
     }
 
     /**

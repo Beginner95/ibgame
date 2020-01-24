@@ -35,7 +35,7 @@ class IndexController extends Controller
 
         $move = $this->getMove($team_id);
 
-        return view(env('THEME') . '.admin.index', [
+        return view('admin.index', [
             'teams' => $teams,
             'team' => $team,
             'move' => $move,

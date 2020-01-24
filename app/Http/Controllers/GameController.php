@@ -41,7 +41,7 @@ class GameController extends Controller
             return redirect('/');
         }
 
-        return view(env('THEME') . '.game', [
+        return view('game', [
             'team' => $team,
             'time' => $time,
             'move' => $move,
@@ -120,6 +120,6 @@ class GameController extends Controller
         foreach ($team->evidences as $evidence) {
             $percent += $evidence->percent;
         }
-        return view(env('THEME') . '.result', ['percent' => $percent]);
+        return view('result', ['percent' => $percent]);
     }
 }

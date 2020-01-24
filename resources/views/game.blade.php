@@ -1,7 +1,7 @@
-@extends(env('THEME') . '.layouts.head')
-
+@extends('layouts.app')
+@section('content')
 <div class="loader">
-    <img src="{{asset(env('THEME'))}}/img/loader_icon.png" alt="#">
+    <img src="{{asset('img/loader_icon.png') }}" alt="#">
 </div>
 <div class="date_wrap">
     <div class="date">{{ $time['dateTime']['date'] }}</div>
@@ -167,4 +167,4 @@
 </div>
 <div class="overlay"></div>
 <div class="time_alert hidden">{{ trans('interface.one_minute') }}</div>
-@extends(env('THEME') . '.layouts.footer')
+@endsection
