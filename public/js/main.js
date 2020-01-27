@@ -279,14 +279,16 @@ function resultAnimation(){
 	var number = getEBCN('result_counter')[0];
 	var animation = setInterval(function() {
 		if(n >= result) {
-			clearInterval(animation)
-		}
-		else {
-			n++
-			number.innerText = n + '%'
+			clearInterval(animation);
+            setTimeout(function () {
+                qS('.show-answer-status').style.display = 'block';
+            },3000);
+		} else {
+			n++;
+			number.innerText = n + '%';
 			setProgress(n)
 		}
-	},50) 
+	},50)
 
 	
 	// setProgress(10)

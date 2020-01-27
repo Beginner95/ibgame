@@ -27,17 +27,19 @@
         </div>
         <input type="hidden" class='result_value' value="{{ $percent }}">
     </div>
-    @if ($percent <= 30)
-        {{ trans('result.p30') }}
-    @elseif ($percent > 30 && $percent <= 50)
-        {{ trans('result.p31-50') }}
-    @elseif ($percent > 50 && $percent <= 70)
-        {{ trans('result.p51-70') }}
-    @elseif ($percent > 70 && $percent <= 90)
-        {{ trans('result.p71-90') }}
-    @else
-        {{ trans('result.p91-100') }}
-    @endif
+    <div class="show-answer-status">
+        @if ($percent <= 30)
+            {{ trans('result.p30') }}
+        @elseif ($percent > 30 && $percent <= 50)
+            {{ trans('result.p31-50') }}
+        @elseif ($percent > 50 && $percent <= 70)
+            {{ trans('result.p51-70') }}
+        @elseif ($percent > 70 && $percent <= 90)
+            {{ trans('result.p71-90') }}
+        @else
+            {{ trans('result.p91-100') }}
+        @endif
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
