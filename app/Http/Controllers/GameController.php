@@ -20,6 +20,7 @@ class GameController extends Controller
 
         if (empty($move)) {
             $move = Move::where('team_id', $team_id)->where('status', 2)->latest('move')->first();
+            if (!empty($move)) return redirect('/game/result/' . $team_id);
         }
 
         $time = [
@@ -103,12 +104,6 @@ class GameController extends Controller
         $a->answer = $answer;
         $a->move_id = $move_id;
         $a->save();
-
-        $move = Move::where('team_id', $team_id)->orderBy('id', 'desc')->first();
-        if ($move->status === '1') {
-            $move->update(['status' => 2]);
-            return redirect('/game/result/' . $team_id);
-        }
 
         return redirect('/game?team=' . $team_id);
     }

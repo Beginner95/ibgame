@@ -62,6 +62,11 @@ class IndexController extends Controller
 
     public function getMove($team_id)
     {
+        $move = Move::where('team_id', $team_id)->latest('move')->first();
+        if (!empty($move) && $move->status === '1') {
+            $move->status_game = 'game_over';
+            return $move;
+        }
         return Move::where('status', 1)->where('team_id', $team_id)->first();
     }
 

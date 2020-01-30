@@ -212,7 +212,7 @@
             {{ Form::open(['route' => 'admin.next.move', 'method' => 'post']) }}
                 <input type="hidden" name="move-id" value="{{ $move->id }}">
                 <input type="hidden" name="team-id" value="{{ $team->id }}">
-                <button class="btn btn-blue next-step">Следующий ход</button>
+                <button class="btn btn-blue next-step">@if ($move->status_game === 'game_over') Завершить игру @else Следующий ход @endif</button>
             {{ Form::close() }}
         @endif
     </div>
