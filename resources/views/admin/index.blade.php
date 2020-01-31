@@ -240,7 +240,7 @@
                         </label>
                     </div>
                     <div class="mini-input">
-                        <label>Время на хода ч:м
+                        <label>Время на ход ч:м
                             <input type="time" name="time" value="00:10" class="item_content_team item_content-input">
                         </label>
                     </div>
