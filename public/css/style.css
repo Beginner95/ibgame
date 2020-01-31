@@ -303,6 +303,7 @@
 		border-color: rgba(10,172,26,0.0); 
 	}
 	.user_grid {
+		width: 100%;
 		display: grid;
 		justify-content: space-between;
 		grid-template-columns: 1fr 266px;
