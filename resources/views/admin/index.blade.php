@@ -41,20 +41,6 @@
                 </p>
                 <button class="btn btn-gray btn-training">Дальше</button>
             </div>
-            <div class="timer @if($team->status === '1') start-time @endif">
-                <span class="timer-hours">{{$time['hour']}}</span>
-                :<span class="timer-mins">{{$time['minutes']}}</span>
-                :<span class="timer-secs">{{$time['seconds']}}</span>
-                <div class="training_modal">
-                    <h4 class="training_heading">
-                        Таймер
-                    </h4>
-                    <p>
-                        Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.
-                    </p>
-                    <button class="btn btn-gray btn-training">Дальше</button>
-                </div>
-            </div>
         </header>
 
         <section class="admin_item item admin_item-main d-flex">
