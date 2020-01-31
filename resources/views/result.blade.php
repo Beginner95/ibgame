@@ -30,11 +30,11 @@
     <div class="show-answer-status">
         @if ($percent <= 30)
             {{ trans('result.p30') }}
-        @elseif ($percent > 30 && $percent <= 50)
+        @elseif ($percent >= 40 && $percent <= 50)
             {{ trans('result.p31-50') }}
-        @elseif ($percent > 50 && $percent <= 70)
+        @elseif ($percent >= 60 && $percent <= 70)
             {{ trans('result.p51-70') }}
-        @elseif ($percent > 70 && $percent <= 90)
+        @elseif ($percent >= 80 && $percent <= 90)
             {{ trans('result.p71-90') }}
         @else
             {{ trans('result.p91-100') }}
