@@ -105,6 +105,8 @@ class GameController extends Controller
         $a->move_id = $move_id;
         $a->save();
 
+        Move::where('id', $move_id)->update(['play_time' => '00:00:00']);
+
         return redirect('/game?team=' . $team_id);
     }
 
