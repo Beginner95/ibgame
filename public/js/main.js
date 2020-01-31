@@ -94,7 +94,7 @@ function timer() {
 
 		if (hours === 0 && mins <= 1) {
             getEBCN('timer')[0].classList.add('last_minute');
-            if (mins === 1 && secs >= 52) {
+            if (mins === 1 && secs <= 3) {
                 qS('.time_alert').classList.remove('hidden')
 			} else {
             	qS('.time_alert').classList.add('hidden');
