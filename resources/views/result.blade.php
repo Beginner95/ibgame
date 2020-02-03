@@ -31,13 +31,13 @@
         @if ($percent <= 30)
             {{ trans('result.p30') }}
         @elseif ($percent >= 40 && $percent <= 50)
-            {{ trans('result.p31-50') }}
+            {{ trans('result.p40-50') }}
         @elseif ($percent >= 60 && $percent <= 70)
-            {{ trans('result.p51-70') }}
+            {{ trans('result.p60-70') }}
         @elseif ($percent >= 80 && $percent <= 90)
-            {{ trans('result.p71-90') }}
+            {{ trans('result.p80-90') }}
         @else
-            {{ trans('result.p91-100') }}
+            {{ trans('result.p100') }}
         @endif
     </div>
 </div>
