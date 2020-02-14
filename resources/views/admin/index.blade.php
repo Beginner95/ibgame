@@ -237,6 +237,18 @@
                 </label>
                 <div class="inputs">
                     <div class="mini-input">
+                        <label>E-mail
+                            <input type="text" name="email" class="item_content_team item_content-input">
+                        </label>
+                    </div>
+                    <div class="mini-input">
+                        <label>Пароль
+                            <input type="password" name="password" class="item_content_team item_content-input">
+                        </label>
+                    </div>
+                </div>
+                <div class="inputs">
+                    <div class="mini-input">
                         <label>Количество ходов
                             <input type="number" name="moves" value="12" class="item_content_team item_content-input">
                         </label>

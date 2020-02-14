@@ -10,9 +10,11 @@ use App\Resource;
 use App\Team;
 use App\Trigger;
 use App\UploadFile;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Auth\RegisterController;
 
 class GameController extends Controller
 {
@@ -44,6 +46,13 @@ class GameController extends Controller
         $team->save();
         $team_id = $team->id;
 
+        $data = [
+            'name' => $teamName,
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'team_id' => $team_id
+        ];
+        $this->createPlayer($data);
         $this->createMoves($team_id, $moves, $moveTime);
 
         return redirect('/admin?team=' . $team_id);
@@ -72,6 +81,12 @@ class GameController extends Controller
             $move->team_id = $team_id;
             $move->save();
         }
+    }
+
+    public function createPlayer(array $data)
+    {
+        $player = new RegisterController();
+        $player->create($data);
     }
 
     public function show($id)
@@ -147,6 +162,7 @@ class GameController extends Controller
         Answer::query()->delete();
         Move::query()->delete();
         Team::query()->delete();
+        User::query()->where('role', '=', 'player')->delete();
         return back();
     }
 }
