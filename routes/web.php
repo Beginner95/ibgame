@@ -48,7 +48,13 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User', 'middl
     Route::get('/game/result/{team}', 'GameController@result')->name('result');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
+Route::group(
+    [
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'namespace' => 'Admin',
+        'middleware' => ['auth', 'roles:administrator']
+    ], function() {
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('/game', 'GameController');
 
