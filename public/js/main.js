@@ -294,7 +294,7 @@ function modalsControl(e){
 			cache: false,
             success:function (data) {
 				if (data.status === 'success') {
-					//window.location = '/team/'
+					window.location = '/user'
 				}
 				if (data.status === 'error') {
                     qS('.error').innerHTML = 'Не верный логин или пароль!';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Answer;
 use App\Move;
@@ -8,12 +8,19 @@ use App\Resource;
 use App\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class GameController extends Controller
+class IndexController extends Controller
 {
-    public function index(Request $request)
+    public function __construct()
     {
-        $team_id = $request['team'];
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $team_id = Auth::user()->team_id;
         if (empty($team_id)) return back();
         $team = Team::where('id', $team_id)->first();
         $move = Move::where('team_id', $team_id)->where('status', 1)->first();
@@ -38,11 +45,7 @@ class GameController extends Controller
             $this->edit($team_id);
         }
 
-        if ((!isset($_COOKIE['game'])) || $_COOKIE['game'] !== 'running' && '1' === $team->status) {
-            return redirect('/');
-        }
-
-        return view('game', [
+        return view('user/game', [
             'team' => $team,
             'time' => $time,
             'move' => $move,
@@ -69,9 +72,7 @@ class GameController extends Controller
 
     public function edit($id)
     {
-        setcookie('game', 'running', 0);
-        Team::where('id', $id)->update(['status' => 1]);
-        return $_COOKIE['game'] = 'running';
+        Team::whereId($id)->update(['status' => 1]);
     }
 
     public function update(Request $request, $id)

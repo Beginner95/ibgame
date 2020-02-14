@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class CustomLoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function loginUser(Request $request)
     {
         $email = $request->email;

@@ -11,11 +11,6 @@ Route::group(['prefix' => \App\Http\Middleware\LocaleMiddleware::getLocale()], f
             'index' => 'home'
         ]
     ]);
-
-    Route::get('/game', 'GameController@index')->name('game');
-    Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
-    Route::post('/game/answer', 'GameController@answer')->name('answer');
-    Route::get('/game/result/{team}', 'GameController@result')->name('result');
 });
 
 Route::get('setlocale/{lang}', function ($lang) {
@@ -44,6 +39,13 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@login');
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::post('/login/user', 'CustomLoginController@loginUser');
+});
+
+Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
+    Route::post('/game/answer', 'GameController@answer')->name('answer');
+    Route::get('/game/result/{team}', 'GameController@result')->name('result');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
