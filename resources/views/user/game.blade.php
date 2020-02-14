@@ -3,6 +3,9 @@
 <div class="loader">
     <img src="{{asset('img/loader_icon.png') }}" alt="#">
 </div>
+<div class="panel-options">
+    <a href="{{ route('logout') }}" class="">Выход</a>
+</div>
 <div class="date_wrap">
     <div class="date">{{ $time['dateTime']['date'] }}</div>
     <div class="time">{{ $time['dateTime']['hour'] }}:{{ $time['dateTime']['minutes'] }}</div>
