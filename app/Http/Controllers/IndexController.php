@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -14,6 +15,9 @@ class IndexController extends Controller
      */
     public function index()
     {
+        if (!empty(Auth::user())) {
+            return redirect('/user');
+        }
         $teams = Team::get();
         return view('index', ['teams' => $teams]);
     }
