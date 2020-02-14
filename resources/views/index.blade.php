@@ -28,10 +28,7 @@
                             type="radio"
                             name="team"
                             value="{{$team->id}}"
-                            class="visually_hidden"
-                            @if ('1' === $team->status)
-                                disabled
-                            @endif>
+                            class="visually_hidden">
                         <span class="team_logo">
                             <img
                                 src="{{ asset('/') }}img/@if(empty($team->icon))default.svg @else{{$team->icon}}@endif"
