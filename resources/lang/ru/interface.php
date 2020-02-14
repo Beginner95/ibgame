@@ -14,5 +14,13 @@ return [
     'screenshot' => 'Скриншот',
     'accept' => 'Принять',
     'file' => 'Файл',
-    'new_information' => 'Новая информация'
+    'new_information' => 'Новая информация',
+
+    //auth form
+    'title_auth_form' => 'Авторизация',
+    'email' => 'E-mail',
+    'password' => 'Пароль',
+    'forgot_password' => 'Забыли пароль?',
+    'sign_in' => 'Войти',
+    'remember' => 'Запомнить'
 ];

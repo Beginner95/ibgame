@@ -979,3 +979,27 @@
 .show-answer-status {
 	display: none;
 }
+
+/*---Auth form---*/
+.auth-form {
+	max-width: 350px;
+}
+
+.auth-form label {
+	margin-top: 10px;
+}
+.auth-form input[type="text"],
+.auth-form input[type="password"]{
+	width: 80%;
+	margin: 5px 0;
+}
+.auth-form input[type="checkbox"] {
+	width: 6%;
+	margin: -12px 5px 0 36px;
+}
+
+.auth-form .error {
+	color: red;
+	font-size: 14px;
+	padding: 3px;
+}

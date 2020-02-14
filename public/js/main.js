@@ -246,6 +246,65 @@ function modalsControl(e){
         modal.classList.add('modal-active');
         overlay.classList.remove('hidden');
 	}
+
+    /*---Section Auth----*/
+    if (e.target.classList.contains('show-auth-form')) {
+        e.preventDefault();
+        const auth_form = qS('.auth-form');
+        auth_form.classList.add('modal-active');
+        overlay.classList.remove('hidden');
+	}
+	if (e.target.classList.contains('sign-in')) {
+        let email = qS('input[name="email"]');
+        let password = qS('input[name="password"]');
+        let remember = qS('input[name="remember"]');
+        if (email.value === '') {
+        	email.style.border = "thin solid red";
+        	alert('Необходимо заполнить логин, минимум 3 символа');
+            email.addEventListener('keyup', function (e) {
+                if (e.target.value.length > 2) {
+                    e.target.style.border = 'none';
+                }
+            });
+        	return;
+		}
+
+		if (password.value === '') {
+            password.style.border = "thin solid red";
+            alert('Необходимо заполнить пароль,  минимум 3 символа');
+            password.addEventListener('keyup', function (e) {
+                if (e.target.value.length > 2) {
+                    e.target.style.border = 'none';
+                }
+            });
+            return;
+		}
+
+		let data = {
+        	email: email.value,
+			password: password.value,
+			//remember: remember
+		};
+
+        $.ajax({
+            url: 'login/user',
+            type: 'POST',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: data,
+			cache: false,
+            success:function (data) {
+				if (data.status === 'success') {
+					//window.location = '/team/'
+				}
+				if (data.status === 'error') {
+                    qS('.error').innerHTML = 'Не верный логин или пароль!';
+				}
+			},
+			error: function (data) {
+            	//c(data);
+            }
+        });
+	}
 }
 
 document.addEventListener('click', modalsControl)

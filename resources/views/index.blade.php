@@ -34,8 +34,48 @@
                     </li>
                 @endforeach
             </ul>
-            <button class="btn btn-blue">{{ trans('interface.start_game') }}</button>
+            <button class="btn btn-blue show-auth-form">{{ trans('interface.start_game') }}</button>
         {{ Form::close() }}
     @endif
+    <div class="modal d-flex auth-form">
+        <h4 class="modal_heading">{{ trans('interface.title_auth_form') }}</h4>
+        <div class="modal_content">
+            <div class="modal_content-main">
+                <label for="email">
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        class="item_content_team item_content-input"
+                        placeholder="{{ trans('interface.email') }}"
+                        required>
+                </label>
+                <label for="password">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="item_content_team item_content-input"
+                        placeholder="{{ trans('interface.password') }}"
+                        required>
+                </label>
+                <span class="error"></span>
+                {{--<label for="remember" class="d-flex">--}}
+                    {{--<input--}}
+                        {{--type="checkbox"--}}
+                        {{--name="remember"--}}
+                        {{--id="remember"--}}
+                        {{--class="item_content_team item_content-input">--}}
+                    {{--{{ trans('interface.remember') }}--}}
+                {{--</label>--}}
+            </div>
+        </div>
+        <div class="btns_wrap d-flex">
+            {{--<button class="btn btn-blue modal_close">{{ trans('interface.forgot_password') }}</button>--}}
+            <button class="btn btn-blue sign-in">{{ trans('interface.sign_in') }}</button>
+        </div>
+
+    </div>
 </div>
+<div class="overlay hidden"></div>
 @endsection
