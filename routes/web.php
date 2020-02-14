@@ -43,9 +43,9 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User', 'middleware' => 'auth'], function () {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::post('/game/save-time', 'GameController@saveTime')->name('save-time');
-    Route::post('/game/answer', 'GameController@answer')->name('answer');
-    Route::get('/game/result/{team}', 'GameController@result')->name('result');
+    Route::post('/save-time', 'IndexController@saveTime')->name('save-time');
+    Route::post('/answer', 'IndexController@answer')->name('answer');
+    Route::get('/result', 'IndexController@result')->name('result');
 });
 
 Route::group(

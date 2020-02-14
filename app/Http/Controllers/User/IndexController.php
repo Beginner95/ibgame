@@ -27,7 +27,7 @@ class IndexController extends Controller
 
         if (empty($move)) {
             $move = Move::where('team_id', $team_id)->where('status', 2)->latest('move')->first();
-            if (!empty($move)) return redirect('/game/result/' . $team_id);
+            if (!empty($move)) return redirect('/user/result');
         }
 
         $time = [
@@ -45,7 +45,7 @@ class IndexController extends Controller
             $this->edit($team_id);
         }
 
-        return view('user/game', [
+        return view('user/index', [
             'team' => $team,
             'time' => $time,
             'move' => $move,
@@ -108,11 +108,12 @@ class IndexController extends Controller
 
         Move::where('id', $move_id)->update(['play_time' => '00:00:00']);
 
-        return redirect('/game?team=' . $team_id);
+        return redirect('/');
     }
 
-    public function result($team_id)
+    public function result()
     {
+        $team_id = Auth::user()->team_id;
         $team = Team::where('id', $team_id)->first();
         $percent = 0;
         foreach ($team->evidences as $evidence) {
