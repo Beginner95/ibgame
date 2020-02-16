@@ -18,4 +18,5 @@ return [
     'what_are_evidences_descriptions' => 'Действия, которые вы совершаете в каждом ходе (ваш ответ), дают вам новую информацию – улики. О найденных уликах вы узнаете благодаря всплывающему окну в начале каждого нового хода. Кроме того, все улики отображаются здесь, а также добавляются в описание задания, чтобы вы точно ничего не упустили и в любой момент могли к ним вернуться.',
     'what_are_triggers' => 'Триггеры',
     'what_are_triggers_description' => 'Exercitation esse sint id reprehenderit. Lorem nostrud id aute minim tempor laborum nostrud. Sint aliquip ut Lorem officia mollit ea anim irure qui Lorem ut nisi dolore.',
+    'start_game' => 'Начать игру'
 ];
