@@ -128,7 +128,7 @@ function timer() {
 
         if (hours === 0 && mins === 0 && secs === 1) {
             $.ajax({
-                url: '/game/save-time',
+                url: '/user/save-time',
                 type: 'POST',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: {"move": move, "hour": hours, "minutes": mins, "seconds": 0},
@@ -139,7 +139,7 @@ function timer() {
 		if (i === 10) {
 			i = 0;
 			$.ajax({
-				url: '/game/save-time',
+				url: '/user/save-time',
 				type: 'POST',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 				data: {"move": move, "hour": hours, "minutes": mins, "seconds": secs},
@@ -475,3 +475,65 @@ if (langs !== null) {
     }
 }
 
+
+document.addEventListener('DOMContentLoaded', function (e) {
+    var btn_is_admin = false;
+    document.addEventListener('click', function (evt) {
+        if (evt.target.classList.contains('next-step')) {
+        	btn_is_admin = true;
+		}
+
+		if (evt.target.classList.contains('send-answer')) {
+        	btn_is_admin = false;
+		}
+    });
+    const socket = new WebSocket("ws://ibgame:8000/server-push.php");
+
+    socket.onopen = function () {
+        c('Connected');
+    };
+
+    socket.onerror = function (error) {
+        c(error.message);
+    };
+
+    socket.onclose = function () {
+        c('Closed');
+    };
+
+// отправка сообщения из формы
+    document.forms.publish.onsubmit = function(e) {
+        let message = {
+            team_id: getId('team_id').value,
+            team_name: this.name.value,
+            team_message: this.answer.value,
+			team_move: getId('move').dataset.move
+        };
+
+        socket.send(JSON.stringify(message));
+        return false;
+    };
+
+    socket.onmessage = function(event) {
+        let data = JSON.parse(event.data);
+        if (data.type !== 'newConnect' && data.team_id !== null) {
+            if (btn_is_admin === false && getId('answer').value === '++++') {
+                const push_modal = qS('.modal-push');
+                qS('.text-info-push').innerText = `Команда ${data.team_name} отправила ответ на ход ${data.team_move}`;
+                push_modal.lastElementChild.firstElementChild.href = '/admin?team=' + data.team_id;
+                push_modal.classList.add('modal-active');
+                overlay.classList.remove('hidden');
+            } else {
+                btn_is_admin = false;
+            	if (getId('team_id').value === data.team_id && getId('answer').value === '----') {
+                    const push_modal = qS('.modal-push');
+                    if (data.team_name === 'game_over') {
+                        qS('.text-info-push').innerText = 'Игра окончена, Вы можете перейти к результатам';
+                    }
+                    push_modal.classList.add('modal-active');
+                    overlay.classList.remove('hidden');
+				}
+			}
+		}
+    };
+});

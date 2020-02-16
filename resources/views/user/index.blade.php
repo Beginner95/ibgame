@@ -61,20 +61,24 @@
             <div class="item_header">
                 <h2 class="item_name">{{ trans('interface.your_answer') }}</h2>
             </div>
-            @if (empty($move->answer->answer))
-                {{ Form::open(['url' => '/user/answer', 'method' => 'post']) }}
+
+                {{ Form::open(['url' => '/user/answer', 'method' => 'post', 'name' => 'publish']) }}
                     <input type="hidden" id="team_id" name="team-id" value="{{$team->id}}">
+                    <input type="hidden" name="name" value="{{ $team->team }}">
                     <input type="hidden" id="move" name="move-id" data-move="{{ $move->move }}" value="{{$move->id}}">
-                    <textarea name="answer" class="item_content item_content-input" required></textarea>
-                    <button class="btn btn-blue">{{ trans('interface.reply') }}</button>
+                @if (empty($move->answer->answer))
+                    <textarea name="answer" id="answer" class="item_content item_content-input" required></textarea>
+                    <button class="btn btn-blue send-answer">{{ trans('interface.reply') }}</button>
+                @else
+                    <input type="hidden" name="answer" id="answer" value="----">
+                    <div class="item_content item_content-input">{{ $move->answer->answer }}</div>
+                @endif
                 {{ Form::close() }}
-            @else
-                <div class="item_content item_content-input">{{ $move->answer->answer }}</div>
-            @endif
+
             <div class="training_modal">
                 <h4 class="training_heading">{{ trans('training.answer') }}</h4>
                 <p>{{ trans('training.answer_description') }}</p>
-                <button class="btn btn-gray btn-training">{{ trans('training.reply') }}</button>
+                <button class="btn btn-gray btn-training">{{ trans('training.start_game') }}</button>
             </div>
         </section>
 
@@ -170,4 +174,15 @@
 </div>
 <div class="overlay"></div>
 <div class="time_alert hidden">{{ trans('interface.one_minute') }}</div>
+<div class="modal d-flex modal-push">
+    <h4 class="modal_heading">Внимание</h4>
+    <div class="modal_content">
+        <div class="modal_content-main text-info-push">
+            Вы можете перейти к следующему ходу
+        </div>
+    </div>
+    <div class="btns_wrap d-flex">
+        <a href="/user" class="btn btn-blue ">Перейти</a>
+    </div>
+</div>
 @endsection

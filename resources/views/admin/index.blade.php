@@ -194,15 +194,24 @@
                 </div>
             </div>
         </aside>
-        @if (!empty($move))
-            {{ Form::open(['route' => 'admin.next.move', 'method' => 'post']) }}
-                <input type="hidden" name="move-id" value="{{ $move->id }}">
-                <input type="hidden" name="team-id" value="{{ $team->id }}">
-                @if (!empty($answer))
-                    <button class="btn btn-blue next-step">@if ($move->status_game === 'game_over') Завершить игру @else Следующий ход @endif</button>
+
+            {{ Form::open(['route' => 'admin.next.move', 'method' => 'post', 'name' => 'publish']) }}
+                @if (!empty($move))
+                <input type="hidden" name="name" value="{{ $move->status_game }}">
+                <input type="hidden" name="move-id" id="move" data-move="{{ $move->move }}" value="{{ $move->id }}">
+                <input type="hidden" name="team-id" id="team_id" value="{{ $team->id }}">
+                <input type="hidden" name="answer" id="answer" value="++++">
+                    @if (!empty($answer))
+                        <button class="btn btn-blue next-step">
+                            @if ($move->status_game === 'game_over')
+                                Завершить игру
+                            @else
+                                Следующий ход
+                            @endif
+                        </button>
+                    @endif
                 @endif
             {{ Form::close() }}
-        @endif
     </div>
 </div>
 <div class="overlay hidden"></div>
@@ -437,5 +446,17 @@
 
 <div class="time_alert hidden">
     У вас осталась 1 минута
+</div>
+{{--Modal information--}}
+<div class="modal d-flex modal-push">
+    <h4 class="modal_heading">Внимание</h4>
+    <div class="modal_content">
+        <div class="modal_content-main text-info-push">
+
+        </div>
+    </div>
+    <div class="btns_wrap d-flex">
+        <a href="" class="btn btn-blue ">Перейти</a>
+    </div>
 </div>
 @endsection
