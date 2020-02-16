@@ -22,7 +22,7 @@ class IndexController extends Controller
     {
         $team_id = Auth::user()->team_id;
         if (empty($team_id)) return back();
-        $team = Team::where('id', $team_id)->first();
+        $team = $this->getTeam($team_id);
         $move = Move::where('team_id', $team_id)->where('status', 1)->first();
 
         if (empty($move)) {
@@ -108,6 +108,11 @@ class IndexController extends Controller
         Move::where('id', $move_id)->update(['play_time' => '00:00:00']);
 
         return redirect('/');
+    }
+
+    protected function getTeam($id)
+    {
+        return Team::whereId($id)->first();
     }
 
     protected function getMoveNumber($id)
