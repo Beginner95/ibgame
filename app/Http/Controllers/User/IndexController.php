@@ -95,7 +95,6 @@ class IndexController extends Controller
 
     public function answer(Request $request)
     {
-        $team_id = $request['team-id'];
         $move_id = $request['move-id'];
         $answer = $request['answer'];
 
@@ -109,6 +108,13 @@ class IndexController extends Controller
         Move::where('id', $move_id)->update(['play_time' => '00:00:00']);
 
         return redirect('/');
+    }
+
+    protected function getMoveNumber($id)
+    {
+        $move = Move::select('move')->whereId($id)->first();
+        return $move->move;
+
     }
 
     public function result()
