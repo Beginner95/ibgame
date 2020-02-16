@@ -30,7 +30,7 @@ class GameController extends Controller
 
     public function store(Request $request)
     {
-        $teamName = $request['name'];
+        $teamName = $request['team-name'];
         $moves = $request['moves'];
         $moveTime = $request['time'];
         $teamDescription = $request['description'];

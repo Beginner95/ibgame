@@ -180,7 +180,7 @@ document.addEventListener('click', modalsControl);
 
 function checkForm(form) {
     if (form.childNodes[2].innerText === 'Добавление команды') {
-        let team_name = qS('input[name="name"]').value;
+        let team_name = qS('input[name="team-name"]').value;
         let team_description = qS('textarea[name="description"]').value;
         if (team_name === '') alert('Необходимо добавить название команды');
         if (team_description === '') alert('Нобходимо добавить описание задачи');

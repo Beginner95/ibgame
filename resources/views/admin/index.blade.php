@@ -242,7 +242,7 @@
         <div class="modal_content modal_content-form">
             <div class="add_team_content">
                 <label>Имя команды
-                    <input type="text" name="name" class="item_content_team item_content-input">
+                    <input type="text" name="team-name" class="item_content_team item_content-input">
                 </label>
                 <div class="inputs">
                     <div class="mini-input">
