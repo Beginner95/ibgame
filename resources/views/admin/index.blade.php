@@ -144,12 +144,17 @@
                     <ul class="evidence_list">
                         @foreach($evidences as $evidence)
                             @php $status = 'data-exist-evidence=0'; @endphp
+                            @php $style_evidence = ''; @endphp
                             @foreach($team->evidences as $e)
                                 @if ($e->id === $evidence->id)
                                     @php $status = 'data-exist-evidence=1'; @endphp
+                                    @php $style_evidence = ' style=color:#404040'; @endphp
                                 @endif
                             @endforeach
-                            <li data-evidence-id="{{ $evidence->id }}" data-evidence-file="{{ $evidence->file }}" data-evidence-percent="{{ $evidence->percent }}" {{$status}}>{{$evidence->clue}}</li>
+                            <li
+                                data-evidence-id="{{ $evidence->id }}"
+                                data-evidence-file="{{ $evidence->file }}"
+                                data-evidence-percent="{{ $evidence->percent }}" {{$status}} {{$style_evidence}}>{{$evidence->clue}}</li>
                         @endforeach
                     </ul>
                 </div>
