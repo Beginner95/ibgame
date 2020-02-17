@@ -511,7 +511,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
         };
 
         socket.send(JSON.stringify(message));
-        return false;
     };
 
     socket.onmessage = function(event) {
