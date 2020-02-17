@@ -933,6 +933,14 @@
 	margin: 0 !important;
 }
 
+.team-answer-color {
+	-moz-text-shadow:0 0 10px #1875ff;
+	-webkit-text-shadow:0 0 10px #1875ff;
+	text-shadow:0 0 10px #1875ff;
+	padding-top: 5px;
+	margin: 0 !important;
+}
+
 .evidence_list li:before {
 	top: 28%;
 }

@@ -95,6 +95,7 @@ class IndexController extends Controller
 
     public function answer(Request $request)
     {
+        $team_id = $request['team-id'];
         $move_id = $request['move-id'];
         $answer = $request['answer'];
 
@@ -104,6 +105,7 @@ class IndexController extends Controller
         $a->answer = $answer;
         $a->move_id = $move_id;
         $a->save();
+        $this->addAnswerInDescription($team_id, $move_id, $answer);
 
         Move::where('id', $move_id)->update(['play_time' => '00:00:00']);
 
@@ -120,6 +122,14 @@ class IndexController extends Controller
         $move = Move::select('move')->whereId($id)->first();
         return $move->move;
 
+    }
+
+    protected function addAnswerInDescription($team_id, $move_id, $answer)
+    {
+        $team = $this->getTeam($team_id);
+        $moveNumber = $this->getMoveNumber($move_id);
+        $team->description = $team->description . '<p class="team-answer-color">Ход ' . $moveNumber . ' - Ответ команды: ' . $answer . '</p>';
+        $team->save();
     }
 
     public function result()
