@@ -23,7 +23,7 @@ while(true) {
         $clientSocketArray[] = $newSocket;
 
         $header = socket_read($newSocket, 5000);
-        $notification->sendHeaders($header, $newSocket, 'ibgame', '8000');
+        $notification->sendHeaders($header, $newSocket, $_SERVER['HTTP_HOST'], '8000');
 
         $newSocketArrayIndex = array_search($socket, $newSocketArray);
         unset($newSocketArray[$newSocketArrayIndex]);

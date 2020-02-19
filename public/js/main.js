@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         	btn_is_admin = false;
 		}
     });
-    const socket = new WebSocket("ws://ibgame:8000/server-push.php");
+    const socket = new WebSocket("ws://" + location.host + ":8000/server-push.php");
 
     socket.onopen = function () {
         c('Connected');
