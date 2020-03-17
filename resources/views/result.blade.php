@@ -6,7 +6,7 @@
 <div class="choose_team d-flex"  style="background: #030919;">
     <header class="header d-flex">
         <div class="logo">
-            <img src="{{ asset('img/logo.svg') }}" alt="">
+            <a href="https://www.group-ib.ru/"><img src="{{ asset('img/logo.svg') }}" alt="GroupIB"></a>
         </div>
         <div class="custom-select">
             <select name="lang" class="lang_select">

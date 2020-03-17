@@ -7,7 +7,7 @@
 <div class="choose_team d-flex" data-vide-bg="{{ asset('video/video') }}">
     <header class="header d-flex">
         <div class="logo">
-            <img src="{{ asset('img/logo.svg') }}" alt="">
+            <a href="/"><img src="{{ asset('img/logo.svg') }}" alt="GroupIB"></a>
         </div>
         <div class="custom-select">
             <select name="lang" class="lang_select">
